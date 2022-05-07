@@ -3,12 +3,72 @@
 const express = require('express')
 const bcrypt = require('bcrypt') // For hashing user passwords and comparing hashed passwords
 const session = require('express-session')
+const router = express.Router();
 
 const app = express()
 const port = process.env.PORT || 3000;
 // Passport 
 const passport = require('passport')
 const Local_Strategy = require('passport-local').Strategy 
+const AWS = require('aws-sdk');
+AWS.config.update({
+    region: 'me-south-1'
+  });
+  const dynamodb = new AWS.DynamoDB.DocumentClient();
+  const dynamodbTableName = 'Sensor';
+
+
+
+// database 
+
+
+router.get('/specifc', async (req, res) => {
+    const params = {
+      TableName: dynamodbTableName,
+      Key: {
+        'Sensor_Id': req.query.Sensor_Id
+      }
+    }
+    await dynamodb.get(params).promise().then(response => {
+      res.json(response.Item);
+    }, error => {
+      console.error('Do your custom error handling here. I am just ganna log it out: ', error);
+      res.status(500).send(error);
+    })
+  })
+  
+  router.get('/all', async (req, res) => {
+    const params = {
+      TableName: dynamodbTableName
+    }
+    try {
+      const allProducts = await scanDynamoRecords(params, []);
+      const body = {
+        products: allProducts
+      }
+      res.json(body);
+    } catch(error) {
+      console.error('Do your custom error handling here. I am just ganna log it out: ', error);
+      res.status(500).send(error);
+    }
+  })
+
+  async function scanDynamoRecords(scanParams, itemArray) {
+    try {
+      const dynamoData = await dynamodb.scan(scanParams).promise();
+      itemArray = itemArray.concat(dynamoData.Items);
+      if (dynamoData.LastEvaluatedKey) {
+        scanParams.ExclusiveStartKey = dynamoData.LastEvaluatedKey;
+        return await scanDynamoRecords(scanParams, itemArray);
+      }
+      return itemArray;
+    } catch(error) {
+      throw new Error(error);
+    }
+  }
+  
+
+
 
 let authenticateUser = async function(username, password, done) {
     let user = users.find(user => user.username == username)
