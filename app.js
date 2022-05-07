@@ -37,11 +37,12 @@ router.get('/specifc', async (req, res) => {
     })
   })
   
-  router.get('/all', async (req, res) => {
+  app.post('/all', async (req, res) => {
     const params = {
       TableName: dynamodbTableName
     }
     try {
+      console.log("inside app.js post /all ");
       const allProducts = await scanDynamoRecords(params, []);
       const body = {
         products: allProducts

@@ -10,25 +10,25 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="/css/main.css">
 
-    <title>Data will be here</title>
+    <title>Data will be</title>
     <script>
       function runCode() {
- 
-          fetch("/all", {
-              method: "GET",
-              // headers: { 'Content-Type': 'application/json' },
-              // body: JSON.stringify(data)
-          })
-          .then((res) => res.text())
-          .then((res) => {
-              const div = document.createElement('div');
-              div.innerHTML = res;
+        console.log("Inside runCode beggining")
+          let request = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify("dataTest")
+        }
+        console.log("Inside runCode")
+        fetch('/all', request).then( res => res.json() )
+        .then( data => {
+          document.getElementById('result').innerHTML = data.result;
+          console.log("Inside fetch")
 
-              document.body.appendChild(div);
-
-              // if needed full page update
-              document.body.innerHTML = res;
-          });
+        })
+        .catch( err => console.log(err) )
       }
   </script>
 </head>
