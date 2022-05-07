@@ -13,12 +13,11 @@
     <title>Data</title>
     <script>
       function runCode() {
-          weight = true
-          data = { weight }
-          fetch("all", {
+ 
+          fetch("/all", {
               method: "GET",
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data)
+              // headers: { 'Content-Type': 'application/json' },
+              // body: JSON.stringify(data)
           })
           .then((res) => res.text())
           .then((res) => {
