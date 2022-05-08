@@ -43,10 +43,10 @@ app.post('/specifc', async (req, res) => {
     }
     try {
       const allProducts = await scanDynamoRecords(params, []);
-      const body = {
-        products: allProducts
-      }
-      res.json(body);
+      // const body = {
+      //   products: allProducts
+      // }
+      res.json(allProducts);
     } catch(error) {
       console.error('Do your custom error handling here. I am just ganna log it out: ', error);
       res.status(500).send(error);
