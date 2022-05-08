@@ -25,7 +25,7 @@
         fetch('/all', request).then( res => res.json() )
         .then( data => {
           document.getElementById('result').innerHTML = data.result;
-          console.log("Inside fetch")
+          console.log("Inside fetch res = ", data.result)
 
         })
         .catch( err => console.log(err) )

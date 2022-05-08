@@ -48,6 +48,7 @@ router.get('/specifc', async (req, res) => {
         products: allProducts
       }
       res.json(body);
+      console.log("body from app .js /all",JSON.stringify(body));
     } catch(error) {
       console.error('Do your custom error handling here. I am just ganna log it out: ', error);
       res.status(500).send(error);
