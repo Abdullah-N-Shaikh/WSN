@@ -41,7 +41,7 @@
     .then( data => {
       // data = JSON.stringify(data);
       var data_filter = data.filter( element => element.Node =="Node1")
-      console.log(data_filter)
+      console.log(JSON.stringify(data_filter))
       document.getElementById('result').innerHTML = JSON.stringify(data_filter);
     })
     .catch( err => console.log(err) )
