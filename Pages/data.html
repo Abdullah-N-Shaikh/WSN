@@ -28,7 +28,28 @@
       }
   </script>
 <script>
-  function runCodeSpecifc() {
+  function node0Data() {
+      console.log("inside runCodeSpecifc");
+      let request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify("dataTest")
+    }
+    fetch('/all', request).then( res => res.json() )
+    .then( data => {
+      // data = JSON.stringify(data);
+      var data_filter = data.filter( element => element.Node =="Node0")
+      document.getElementById('result').innerHTML = JSON.stringify(data_filter);
+    })
+    .catch( err => console.log(err) )
+  }
+</script>
+
+
+<script>
+  function node1Data() {
       console.log("inside runCodeSpecifc");
       let request = {
       method: 'POST',
@@ -41,7 +62,66 @@
     .then( data => {
       // data = JSON.stringify(data);
       var data_filter = data.filter( element => element.Node =="Node1")
-      console.log(JSON.stringify(data_filter))
+      document.getElementById('result').innerHTML = JSON.stringify(data_filter);
+    })
+    .catch( err => console.log(err) )
+  }
+</script>
+
+<script>
+  function node2Data() {
+      console.log("inside runCodeSpecifc");
+      let request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify("dataTest")
+    }
+    fetch('/all', request).then( res => res.json() )
+    .then( data => {
+      // data = JSON.stringify(data);
+      var data_filter = data.filter( element => element.Node =="Node2")
+      document.getElementById('result').innerHTML = JSON.stringify(data_filter);
+    })
+    .catch( err => console.log(err) )
+  }
+</script>
+
+<script>
+  function node3Data() {
+      console.log("inside runCodeSpecifc");
+      let request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify("dataTest")
+    }
+    fetch('/all', request).then( res => res.json() )
+    .then( data => {
+      // data = JSON.stringify(data);
+      var data_filter = data.filter( element => element.Node =="Node3")
+      document.getElementById('result').innerHTML = JSON.stringify(data_filter);
+    })
+    .catch( err => console.log(err) )
+  }
+</script>
+
+<script>
+  function node4Data() {
+      console.log("inside runCodeSpecifc");
+      let request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify("dataTest")
+    }
+    fetch('/all', request).then( res => res.json() )
+    .then( data => {
+      // data = JSON.stringify(data);
+      var data_filter = data.filter( element => element.Node =="Node4")
       document.getElementById('result').innerHTML = JSON.stringify(data_filter);
     })
     .catch( err => console.log(err) )
@@ -72,16 +152,24 @@
     <br></br>
     <button onclick="runCode()">Show all data on the database</button>
     <br></br>
-    <button onclick="runCodeSpecifc()">Show all Node1 data</button>
+    <button onclick="node0Data()">Show all Node0 data</button>
+    <br></br>
+    <button onclick="node1Data()">Show all Node1 data</button>
+    <br></br>
+    <button onclick="node2Data()">Show all Node2 data</button>
+    <br></br>
+    <button onclick="node3Data()">Show all Node3 data</button>
+    <br></br>
+    <button onclick="node4Data()">Show all Node4 data</button>
     <br></br>
 
-
+<!-- 
     <form onclick="runCodeSpecifc()">
       <label>Type reading number you want to display:
         <input type = "text" name="Y"  id="Y"></input>
         </label>
         <input type="submit" value="Submit"></input>
-    </form>
+    </form> -->
 
 
 
