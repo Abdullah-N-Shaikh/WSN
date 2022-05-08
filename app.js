@@ -42,13 +42,11 @@ router.get('/specifc', async (req, res) => {
       TableName: dynamodbTableName
     }
     try {
-      console.log("inside app.js post /all ");
       const allProducts = await scanDynamoRecords(params, []);
       const body = {
         products: allProducts
       }
       res.json(body);
-      console.log("body from app .js /all",JSON.stringify(body));
     } catch(error) {
       console.error('Do your custom error handling here. I am just ganna log it out: ', error);
       res.status(500).send(error);

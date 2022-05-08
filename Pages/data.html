@@ -13,7 +13,6 @@
     <title>Data will be</title>
     <script>
       function runCode() {
-        console.log("Inside runCode beggining")
           let request = {
           method: 'POST',
           headers: {
@@ -21,19 +20,9 @@
           },
           body: JSON.stringify("dataTest")
         }
-        console.log("Inside runCode")
         fetch('/all', request).then( res => res.json() )
         .then( data => {
           document.getElementById('result').innerHTML = JSON.stringify(data);
-          console.log("Inside fetch res = ", data.result)
-          console.log("Inside fetch res = ", data)
-          console.log("Inside fetch res = ", JSON.stringify(data))
-          console.log("Res body ", res.body)
-          console.log("Res body ", JSON.stringify(res.body))
-
-
-
-
         })
         .catch( err => console.log(err) )
       }
@@ -54,7 +43,7 @@
         </div>
       </nav>
     <h1>Data from pc</h1>
-    <button onclick="runCode()">Click me</button>
+    <button onclick="runCode()">Show all data on the database</button>
 
 
     <div id="result"></div>
