@@ -46,10 +46,10 @@
 </script>
 
 
-let numbers = { 
+<!-- let numbers = { 
   "X": event.currentTarget.X.value,
   "Y": event.currentTarget.Y.value
-};
+}; -->
 </head>
 <body>
 
@@ -69,7 +69,7 @@ let numbers = {
     <br></br>
     <button onclick="runCode()">Show all data on the database</button>
     <br></br>
-    <form onSubmit = {runCodeSpecifc()}>
+    <form onSubmit = "runCodeSpecifc()">
       <label>Type reading number you want to display:
         <input type = "text" name="Y"  id="Y"></input>
         </label>
