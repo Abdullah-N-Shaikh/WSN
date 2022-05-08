@@ -27,6 +27,29 @@
         .catch( err => console.log(err) )
       }
   </script>
+
+<script>
+  function runCodeSpecifc() {
+      let request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify("dataTest")
+    }
+    fetch('/all', request).then( res => res.json() )
+    .then( data => {
+      document.getElementById('result').innerHTML = JSON.stringify(data);
+    })
+    .catch( err => console.log(err) )
+  }
+</script>
+
+
+let numbers = { 
+  "X": event.currentTarget.X.value,
+  "Y": event.currentTarget.Y.value
+};
 </head>
 <body>
 
@@ -42,8 +65,17 @@
           </ul>
         </div>
       </nav>
-    <h1>Data from pc</h1>
+    <h1>Click one of the buttons to show some data</h1>
+    <br></br>
     <button onclick="runCode()">Show all data on the database</button>
+    <br></br>
+    <form onSubmit = {runCodeSpecifc()}>
+      <label>Type reading number you want to display:
+        <input type = "text" name="Y"  id="Y"></input>
+        </label>
+        <input type="submit" value="Submit"></input>
+    </form>
+
 
 
     <div id="result"></div>

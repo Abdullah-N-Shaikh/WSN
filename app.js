@@ -22,7 +22,7 @@ AWS.config.update({
 // database 
 
 
-router.get('/specifc', async (req, res) => {
+app.post('/specifc', async (req, res) => {
     const params = {
       TableName: dynamodbTableName,
       Key: {
