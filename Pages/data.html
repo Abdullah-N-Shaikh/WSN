@@ -28,7 +28,7 @@
       }
   </script>
 <script>
-  function runCodeSpecifc(event) {
+  function runCodeSpecifc() {
       console.log("inside runCodeSpecifc");
       let request = {
       method: 'POST',
@@ -39,7 +39,10 @@
     }
     fetch('/all', request).then( res => res.json() )
     .then( data => {
-      document.getElementById('result').innerHTML = JSON.stringify(data);
+      data = JSON.stringify(data);
+      const node1Only = JSON.parse(data).filter(({Node}) => Node === 'Node1');
+
+      document.getElementById('result').innerHTML = JSON.stringify(node1Only);
     })
     .catch( err => console.log(err) )
   }
@@ -69,6 +72,10 @@
     <br></br>
     <button onclick="runCode()">Show all data on the database</button>
     <br></br>
+    <button onclick="runCodeSpecifc()">Show all Node1 data</button>
+    <br></br>
+
+
     <form onclick="runCodeSpecifc()">
       <label>Type reading number you want to display:
         <input type = "text" name="Y"  id="Y"></input>
