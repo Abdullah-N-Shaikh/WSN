@@ -24,7 +24,7 @@
         console.log("Inside runCode")
         fetch('/all', request).then( res => res.json() )
         .then( data => {
-          document.getElementById('result').innerHTML = data.result;
+          document.getElementById('result').innerHTML = JSON.stringify(data);
           console.log("Inside fetch res = ", data.result)
           console.log("Inside fetch res = ", data)
           console.log("Inside fetch res = ", JSON.stringify(data))
