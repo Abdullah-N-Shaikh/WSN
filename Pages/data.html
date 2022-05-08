@@ -26,6 +26,13 @@
         .then( data => {
           document.getElementById('result').innerHTML = data.result;
           console.log("Inside fetch res = ", data.result)
+          console.log("Inside fetch res = ", data)
+          console.log("Inside fetch res = ", JSON.stringify(data))
+          console.log("Res body ", res.body)
+          console.log("Res body ", JSON.stringify(res.body))
+
+
+
 
         })
         .catch( err => console.log(err) )
