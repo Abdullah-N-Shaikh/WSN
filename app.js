@@ -1,4 +1,3 @@
-// https://www.youtube.com/watch?v=-RCnNyD0L-s&t=625s
 
 const express = require('express')
 const bcrypt = require('bcrypt') // For hashing user passwords and comparing hashed passwords
