@@ -137,7 +137,7 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 })
 
 app.post('/logout', function(req, res){
-  req.logOut();
+  req.session.destroy();
   res.redirect('/login');
 });
 
