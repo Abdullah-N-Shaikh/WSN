@@ -2,7 +2,7 @@
 const express = require('express')
 const bcrypt = require('bcrypt') // For hashing user passwords and comparing hashed passwords
 const session = require('express-session')
-const router = express.Router();
+// const router = express.Router();
 
 const app = express()
 const port = process.env.PORT || 3000;
@@ -22,20 +22,20 @@ AWS.config.update({
 
 // app.use(express.static(__dirname + '/css/auth.css'));
 
-app.post('/specifc', async (req, res) => {
-    const params = {
-      TableName: dynamodbTableName,
-      Key: {
-        'Sensor_Id': req.query.Sensor_Id
-      }
-    }
-    await dynamodb.get(params).promise().then(response => {
-      res.json(response.Item);
-    }, error => {
-      console.error('Do your custom error handling here. I am just ganna log it out: ', error);
-      res.status(500).send(error);
-    })
-  })
+// app.post('/specifc', async (req, res) => {
+//     const params = {
+//       TableName: dynamodbTableName,
+//       Key: {
+//         'Sensor_Id': req.query.Sensor_Id
+//       }
+//     }
+//     await dynamodb.get(params).promise().then(response => {
+//       res.json(response.Item);
+//     }, error => {
+//       console.error('Do your custom error handling here. I am just ganna log it out: ', error);
+//       res.status(500).send(error);
+//     })
+//   })
   
   app.post('/all', async (req, res) => {
     const params = {
@@ -136,9 +136,15 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.sendFile('Pages/register.html', {root: __dirname})
 })
 
+app.post('/logout', function(req, res){
+  req.logout();
+  res.redirect('/login');
+});
+
 app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
         let hashed_passowrd = await bcrypt.hash(req.body.password, 10)
+        // push data to DB
         users.push({
             id: Date.now().toString(),
             username: req.body.username,
