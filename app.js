@@ -137,8 +137,10 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 })
 
 app.post('/logout', function(req, res){
-  req.session.destroy();
-  res.redirect('/login');
+  req.session.destroy(function() {
+    res.clearCookie('connect.sid');
+    res.redirect('/');
+});
 });
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
