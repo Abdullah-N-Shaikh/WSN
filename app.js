@@ -110,7 +110,6 @@ app.use(session({
 // Passport
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(passport.flash());
 
 app.get('/', checkAuthenticated, (req, res) => {
     res.sendFile('Pages/index.html', {root: __dirname})
