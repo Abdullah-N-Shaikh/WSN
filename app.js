@@ -93,7 +93,7 @@ let authenticateUser = async function(username, password, done) {
     }
 }
 
-passport.use(new Local_Strategy({ usernameField: 'username'}, authenticateUser))
+passport.use(new Local_Strategy({ usernameField: 'username', passReqToCallback: true}, authenticateUser))
 passport.serializeUser((user, done) => done(null, user.id) )
 passport.deserializeUser((id, done) => { 
     return done(null, users.find(user => user.id == id))
