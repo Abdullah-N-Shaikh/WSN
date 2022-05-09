@@ -93,7 +93,7 @@ let authenticateUser = async function(username, password, done) {
     }
 }
 
-passport.use(new Local_Strategy({ usernameField: 'username', passReqToCallback: true}, authenticateUser))
+passport.use(new Local_Strategy({ usernameField: 'username'}, authenticateUser))
 passport.serializeUser((user, done) => done(null, user.id) )
 passport.deserializeUser((id, done) => { 
     return done(null, users.find(user => user.id == id))
@@ -136,8 +136,8 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
-    failureFlash: true,
     failureRedirect: '/login',
+    failureFlash: true
 }))
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
