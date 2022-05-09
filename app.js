@@ -2,10 +2,15 @@
 const express = require('express')
 const bcrypt = require('bcrypt') // For hashing user passwords and comparing hashed passwords
 const session = require('express-session')
+// const flash =require('connect-flash');
+
+
 // const router = express.Router();
 
 const app = express()
 const port = process.env.PORT || 3000;
+// app.use(flash());
+
 // Passport 
 const passport = require('passport')
 const Local_Strategy = require('passport-local').Strategy 
@@ -13,8 +18,9 @@ const AWS = require('aws-sdk');
 AWS.config.update({
     region: 'me-south-1'
   });
-  const dynamodb = new AWS.DynamoDB.DocumentClient();
-  const dynamodbTableName = 'Sensor';
+const dynamodb = new AWS.DynamoDB.DocumentClient();
+const dynamodbTableName = 'Sensor';
+
 
 
 
@@ -106,6 +112,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+app.use(flash());
+
 
 // Passport
 app.use(passport.initialize())
