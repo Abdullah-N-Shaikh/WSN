@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
     <header>
-        <!-- <link rel="stylesheet" type="text/css" href="css\auth.css"> -->
-
 
     <style>
 
@@ -260,31 +258,10 @@ footer a {
 
     </style>
 
-
     </header>
 <body>
-    <!-- <script src="auth.js"></script> -->
-
-    <!-- <h1> Login </h1>
-    <form action="/login" method="post">
-        <label>Username: </label>
-        <input type="text" name="username"><br>
-        <label>Password: </label>
-        <input type="text" name="password"><br><br>
-        <input type="submit" value="Submit">
-    </form> -->
-
-    <h2>Sign in Page</h2>
+    <h2>Sign In Page</h2>
 <div class="container" id="container">
-	<!-- <div class="form-container sign-up-container">
-        <form action="/register" method="post">
-            <label>Username: </label>
-            <input type="text" name="username"><br>
-            <label>Password: </label>
-            <input type="text" name="password"><br><br>
-            <input type="submit" value="Submit">
-        </form>
-	</div> -->
 	<div class="form-container sign-in-container">
         <form action="/login" method="post">
             <label>Username: </label>
@@ -296,39 +273,17 @@ footer a {
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
-            
-    <script>
-        const signUpButton = document.getElementById('signUp');
-        const signInButton = document.getElementById('signIn');
-        const container = document.getElementById('container');
-
-        signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
-        });
-
-        signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
-        });
-    </script>
-
-			<div class="overlay-panel overlay-right">
+  			<div class="overlay-panel overlay-right">
 				<h1>Welcome Back!</h1>
 				<p>To keep connected with us please login with your personal info</p>
-				<!-- <form action="/register" method="post">
-					<button>Sign Up !</button>
-					<input type="submit" value="Submit">
-				</form> -->
+				<p>Or you may Sign Up !</p>
 				<a href="/register">
-                    <button>Submit Button</button>
+                    <button>Sign Up</button>
                   </a>
-				<!-- <button class="ghost" id="signUp">Sign Up</button> -->
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
 
 </body>
 </html>
