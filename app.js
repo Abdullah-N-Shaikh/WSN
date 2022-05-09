@@ -20,6 +20,7 @@ AWS.config.update({
 
 // database 
 
+app.use(express.static(__dirname + '/css/auth.css'));
 
 app.post('/specifc', async (req, res) => {
     const params = {
