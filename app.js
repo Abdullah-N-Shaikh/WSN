@@ -136,8 +136,10 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.sendFile('Pages/register.html', {root: __dirname})
 })
 
-app.post('/logout', function(req, res){
+app.get('/logout', function(req, res){
+  console.log("Inside app.js logout");
   req.session.destroy(function() {
+    console.log("Inside app.js logout clearCookie" );
     res.clearCookie('connect.sid');
     res.redirect('/');
 });
