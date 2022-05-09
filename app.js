@@ -20,7 +20,7 @@ AWS.config.update({
 
 // database 
 
-app.use(express.static(__dirname + '/css/auth.css'));
+// app.use(express.static(__dirname + '/css/auth.css'));
 
 app.post('/specifc', async (req, res) => {
     const params = {
@@ -156,7 +156,7 @@ function checkAuthenticated(req, res, next) {
       return next()
     }
   
-    res.redirect('/register') //edit this to login
+    res.redirect('/login') //edit this to login
   }
   
   function checkNotAuthenticated(req, res, next) {
