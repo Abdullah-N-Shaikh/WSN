@@ -112,8 +112,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+const flash = require('connect-flash');
 app.use(flash());
-
 
 // Passport
 app.use(passport.initialize())
