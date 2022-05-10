@@ -121,12 +121,55 @@
     fetch('/all', request).then( res => res.json() )
     .then( data => {
       // data = JSON.stringify(data);
-      var data_filter = data.filter( element => element.Node =="Node4")
-      document.getElementById('result').innerHTML = JSON.stringify(data_filter);
+      var myList = data.filter( element => element.Node =="Node4")
+      
+// var myList=[{"Node":"Node0","Sensor_Id":"14","Temperature":"23","Humidity":"22"},{"Node":"Node0","Sensor_Id":"347","Temperature":"22","Humidity":"23"},{"Node":"Node0","Sensor_Id":"122","Temperature":"23","Humidity":"23"},{"Node":"Node0","Sensor_Id":"313","Temperature":"22","Humidity":"23"},{"Node":"Node0","Sensor_Id":"701","Temperature":"16","Humidity":"40"},{"Node":"Node0","Sensor_Id":"317","Temperature":"22","Humidity":"23"},{"Node":"Node0","Sensor_Id":"138","Temperature":"23","Humidity":"22"}];
+
+// Builds the HTML Table out of myList json data from Ivy restful service.
+ 
+     var columns = addAllColumnHeaders(myList);
+ 
+     for (var i = 0 ; i < myList.length ; i++) {
+         var row$ = $('<tr/>');
+         for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
+             var cellValue = myList[i][columns[colIndex]];
+ 
+             if (cellValue == null) { cellValue = ""; }
+ 
+             row$.append($('<td/>').html(cellValue));
+         }
+         $("#excelDataTable").append(row$);
+     }
+ 
+ 
+ // Adds a header row to the table and returns the set of columns.
+ // Need to do union of keys from all records as some records may not contain
+ // all records
+ function addAllColumnHeaders(myList)
+ {
+     var columnSet = [];
+     var headerTr$ = $('<tr/>');
+ 
+     for (var i = 0 ; i < myList.length ; i++) {
+         var rowHash = myList[i];
+         for (var key in rowHash) {
+             if ($.inArray(key, columnSet) == -1){
+                 columnSet.push(key);
+                 headerTr$.append($('<th/>').html(key));
+             }
+         }
+     }
+     $("#excelDataTable").append(headerTr$);
+ 
+     return columnSet;
+ }
+
+      document.getElementById('result').innerHTML = JSON.stringify(myList);
     })
     .catch( err => console.log(err) )
   }
 </script>
+
 
 
 <!-- let numbers = { 
@@ -175,6 +218,8 @@
 
 
     <div id="result"></div>
+    <table id="excelDataTable" border="1">
+    </table>
 
 </body>
 </html>
