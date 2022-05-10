@@ -164,7 +164,7 @@ function addAllColumnHeaders(myList)
 </script>
 
 <script>
-  function sortTable() {
+  function sortTable(val) {
     console.log("Inside sortTable")
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("excelDataTable");
@@ -182,8 +182,8 @@ function addAllColumnHeaders(myList)
         shouldSwitch = false;
         /*Get the two elements you want to compare,
         one from current row and one from the next:*/
-        x = rows[i].getElementsByTagName("TD")[1];
-        y = rows[i + 1].getElementsByTagName("TD")[1];
+        x = rows[i].getElementsByTagName("TD")[val];
+        y = rows[i + 1].getElementsByTagName("TD")[val];
         //check if the two rows should switch place:
         if (Number(x.innerHTML) > Number(y.innerHTML)) {
           //if so, mark as a switch and break the loop:
@@ -236,7 +236,11 @@ function addAllColumnHeaders(myList)
     <button value="Node4" onclick="nodeData(this.value)">Show all Node4 data</button>
     <br></br>
     <p>Click the button to sort the table numerically:</p>
-    <p><button onclick="sortTable()">Sort</button></p>
+    <p><button value="1" onclick="sortTable(this.value)">Sort Sensor ID</button></p>
+    <p><button value="2" onclick="sortTable(this.value)">Sort Tempreture</button></p>
+    <p><button value="3" onclick="sortTable(this.value)">Sort Hunidity</button></p>
+
+
 
 <!-- 
     <form onclick="runCodeSpecifc()">
