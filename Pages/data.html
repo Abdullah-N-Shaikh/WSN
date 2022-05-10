@@ -9,8 +9,32 @@
 
 	<!-- CSS -->
   <style>
-    th {
-    font-weight : bold
+table {
+
+font-family: arial, sans-serif;
+
+border-collapse: collapse;
+
+width: 100%;
+
+}
+
+
+td, th {
+
+border: 1px solid #dddddd;
+
+text-align: left;
+
+padding: 8px;
+
+}
+
+
+tr:nth-child(even) {
+
+background-color: #dddddd;
+
 }
   </style>
 	<!-- Latest compiled and minified CSS -->
@@ -34,7 +58,7 @@
         .catch( err => console.log(err) )
       }
   </script>
-<script>
+<!-- <script>
   function node0Data() {
       console.log("inside runCodeSpecifc");
       let request = {
@@ -113,11 +137,14 @@
     })
     .catch( err => console.log(err) )
   }
-</script>
+</script> -->
 
 <script>
   function nodeData(node) {
       console.log("inside runCodeSpecifc");
+      //Clear the table
+      var Table = document.getElementById("excelDataTable");
+      Table.innerHTML = "";
       let request = {
       method: 'POST',
       headers: {
