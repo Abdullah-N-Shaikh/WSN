@@ -163,6 +163,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
             password: hashed_passowrd
         })
         // to dynamodb
+        console.log("Inside /register before uploading to db");
           const params = {
             TableName: "UserInfo",
             Item: {
@@ -178,8 +179,8 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
               console.log(`Added ${req.body.username} with a hashed password of ${hashed_passowrd}%`);
             }
           });
-       
-        res.redirect('/login')
+          console.log("Inside /register After 2 uploading to db")
+          res.redirect('/login')
     } catch {
         res.redirect('/register')
     }
