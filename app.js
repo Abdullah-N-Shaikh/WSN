@@ -173,6 +173,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
             },
           };
           dynamodb.putItem(params, function(err) {
+            console.log("dynamodb.putItem(params, function(err)")
             if (err) {
               console.error("Unable to add user", err);
             } else {
