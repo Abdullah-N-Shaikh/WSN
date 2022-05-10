@@ -116,7 +116,7 @@
 </script>
 
 <script>
-  function node4Data() {
+  function nodeData(node) {
       console.log("inside runCodeSpecifc");
       let request = {
       method: 'POST',
@@ -128,7 +128,8 @@
     fetch('/all', request).then( res => res.json() )
     .then( data => {
       // data = JSON.stringify(data);
-      var myList = data.filter( element => element.Node =="Node4")
+      // if node = 
+      var myList = data.filter( element => element.Node == node)
       
 // var myList=[{"Node":"Node0","Sensor_Id":"14","Temperature":"23","Humidity":"22"},{"Node":"Node0","Sensor_Id":"347","Temperature":"22","Humidity":"23"},{"Node":"Node0","Sensor_Id":"122","Temperature":"23","Humidity":"23"},{"Node":"Node0","Sensor_Id":"313","Temperature":"22","Humidity":"23"},{"Node":"Node0","Sensor_Id":"701","Temperature":"16","Humidity":"40"},{"Node":"Node0","Sensor_Id":"317","Temperature":"22","Humidity":"23"},{"Node":"Node0","Sensor_Id":"138","Temperature":"23","Humidity":"22"}];
 
@@ -203,15 +204,15 @@
     <br></br>
     <button onclick="runCode()">Show all data on the database</button>
     <br></br>
-    <button onclick="node0Data()">Show all Node0 data</button>
+    <button onclick="nodeData(Node0)">Show all Node0 data</button>
     <br></br>
-    <button onclick="node1Data()">Show all Node1 data</button>
+    <button onclick="nodeData(Node1)">Show all Node1 data</button>
     <br></br>
-    <button onclick="node2Data()">Show all Node2 data</button>
+    <button onclick="nodeData(Node2)">Show all Node2 data</button>
     <br></br>
-    <button onclick="node3Data()">Show all Node3 data</button>
+    <button onclick="nodeData(Node3)">Show all Node3 data</button>
     <br></br>
-    <button onclick="node4Data()">Show all Node4 data</button>
+    <button onclick="nodeData(Node4)">Show all Node4 data</button>
     <br></br>
 
 <!-- 
