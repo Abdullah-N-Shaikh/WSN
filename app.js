@@ -171,17 +171,18 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
               Username: { S: req.body.username },
               Password: { S: hashed_passowrd },
             },
-          };
+          }
           dynamodb.putItem(params, function(err) {
-            console.log("dynamodb.putItem(params, function(err)")
+            console.log("dynamodb.putItem(params, function(err)");
             if (err) {
               console.error("Unable to add user", err);
             } else {
               console.log(`Added ${req.body.username} with a hashed password of ${hashed_passowrd}%`);
+              console.log("Inside /register After 2 uploading to db");
+              res.redirect('/login')
             }
-          });
-          console.log("Inside /register After 2 uploading to db")
-          res.redirect('/login')
+          })
+
     } catch {
         res.redirect('/register')
     }
