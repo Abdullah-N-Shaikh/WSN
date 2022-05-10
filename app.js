@@ -162,6 +162,23 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
             username: req.body.username,
             password: hashed_passowrd
         })
+        // to dynamodb
+          const params = {
+            TableName: "UserInfo",
+            Item: {
+              ID: Date.now().toString(),
+              Username: { S: req.body.username },
+              Password: { S: hashed_passowrd },
+            },
+          };
+          dynamodb.putItem(params, function(err) {
+            if (err) {
+              console.error("Unable to add user", err);
+            } else {
+              console.log(`Added ${req.body.username} with a hashed password of ${hashed_passowrd}%`);
+            }
+          });
+       
         res.redirect('/login')
     } catch {
         res.redirect('/register')
