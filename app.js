@@ -178,6 +178,8 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
         let hashed_passowrd = await bcrypt.hash(req.body.password, 10)
         // push data to DB
+        console.log("Before adding the user to DB",req.body.username, hashed_passowrd);
+
         addUser(req.body.username,hashed_passowrd)
         console.log("The user should have been added to DB",req.body.username, hashed_passowrd);
         users.push({
