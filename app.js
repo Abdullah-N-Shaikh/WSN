@@ -14,6 +14,8 @@ const port = process.env.PORT || 3000;
 // Passport 
 const passport = require('passport')
 const Local_Strategy = require('passport-local').Strategy 
+
+
 const AWS = require('aws-sdk');
 AWS.config.update({
     region: 'me-south-1'
@@ -21,6 +23,25 @@ AWS.config.update({
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 const dynamodbTableName = 'Sensor';
 
+
+function addUser(username, password) {
+	const params = {
+	  TableName: "UserInfo",
+	  Item: {
+		ID: { S: "1" },
+		Username: { N: username },
+		Password: {S: password}
+	  },
+	};
+
+	dynamodb.putItem(params, function(err) {
+	  if (err) {
+		console.error("Unable to add User", err);
+	  } else {
+		console.log(`Added ${Username} with password of ${Password}%`);
+	  }
+	});
+  }
 
 
 
@@ -152,11 +173,13 @@ app.get('/logout', function(req, res){
     res.redirect('/');
 });
 });
-
+// from the register button click
 app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
         let hashed_passowrd = await bcrypt.hash(req.body.password, 10)
         // push data to DB
+        addUser(req.body.username,hashed_passowrd)
+        console.log("The user should have been added to DB",req.body.username, hashed_passowrd);
         users.push({
             id: Date.now().toString(),
             username: req.body.username,
