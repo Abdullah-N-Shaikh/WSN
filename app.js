@@ -29,9 +29,8 @@ const dynamodbTableName = 'Sensor';
 function addUser(username, password) {
   console.log("inside adduser funcion")
 	const params = {
-	  TableName: "UserInfo",
+	  TableName: "UserDB",
 	  Item: {
-		ID: { S: "1" },
 		Username: { S: username },
 		Password: {S: password}
 	  },
@@ -42,9 +41,26 @@ function addUser(username, password) {
 	  if (err) {
 		console.error("Unable to add User", err);
 	  } else {
-		console.log(`Added ${Username} with password of ${Password}%`);
+		console.log(`Added ${username} with password of ${password}%`);
 	  }
 	});
+  }
+
+  function getUser(username) {
+    const params = {
+      TableName: "UserDB",
+      Key: {
+        Username: { S: username },
+      },
+    };
+  
+    DynamoDB.getItem(params, function(err, data) {
+      if (err) {
+        console.error("Unable to a user with same username", err);
+      } else {
+        console.log("Found user inforamtion", data.Item);
+      }
+    });
   }
 
 
@@ -102,6 +118,10 @@ function addUser(username, password) {
 
 
 let authenticateUser = async function(username, password, done) {
+
+    getUser(username);
+    
+
     let user = users.find(user => user.username == username)
     if(user == null){
         return done(null, false, {message: 'No such user!'})
