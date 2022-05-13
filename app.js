@@ -119,10 +119,9 @@ let authenticateUser = async function(username, password, done) {
     } else {
       console.log("Found user inforamtion", data.Item);
       console.log("His password is : ", data.Item.Password.S);
-    // // getUser(username);
 
-
-    let user = users.find(user => user.username == username)
+      
+    // let user = users.find(user => user.username == username)
     // if(user == null){
     //     return done(null, false, {message: 'No such user!'})
     // }
@@ -138,12 +137,15 @@ let authenticateUser = async function(username, password, done) {
   } catch(err) {
       return done(err)
   }
+  
     }
   });
 
 
 
 
+
+    // // getUser(username);
 
 
 }
