@@ -135,13 +135,11 @@ let authenticateUser = async function(username, password, done) {
     }
     // User exists. Check password
     try {
-      if(await bcrypt.compare(password, user.password)){
-        console.log("User has been authenticated from array")
-        return done(null, username)
-    } else {
-        console.log("Wrong information from array")
-        return done(null, false, {message: 'Password incorrect!'})
-    }
+        if(await bcrypt.compare(password, user.password)){
+            return done(null, user)
+        } else {
+            return done(null, false, {message: 'Password incorrect!'})
+        }
     } catch(err) {
         return done(err)
     }
