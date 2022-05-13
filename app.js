@@ -21,10 +21,13 @@ AWS.config.update({
     region: 'me-south-1'
   });
 const dynamodb = new AWS.DynamoDB.DocumentClient();
+const DynamoDB = new AWS.DynamoDB();
+
 const dynamodbTableName = 'Sensor';
 
 
 function addUser(username, password) {
+  console.log("inside adduser funcion")
 	const params = {
 	  TableName: "UserInfo",
 	  Item: {
@@ -33,8 +36,9 @@ function addUser(username, password) {
 		Password: {S: password}
 	  },
 	};
+  console.log("parm has been created")
 
-	dynamodb.putItem(params, function(err) {
+	DynamoDB.putItem(params, function(err) {
 	  if (err) {
 		console.error("Unable to add User", err);
 	  } else {
