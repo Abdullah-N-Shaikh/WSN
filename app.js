@@ -47,20 +47,7 @@ function addUser(username, password) {
   }
 
   function getUser(username) {
-    const params = {
-      TableName: "UserDB",
-      Key: {
-        Username: { S: username },
-      },
-    };
-  
-    DynamoDB.getItem(params, function(err, data) {
-      if (err) {
-        console.error("Unable to a user with same username", err);
-      } else {
-        console.log("Found user inforamtion", data.Item);
-      }
-    });
+    
   }
 
 
@@ -119,8 +106,28 @@ function addUser(username, password) {
 
 let authenticateUser = async function(username, password, done) {
 
+  const params = {
+    TableName: "UserDB",
+    Key: {
+      Username: { S: username },
+    },
+  };
+
+  DynamoDB.getItem(params, function(err, data) {
+    if (err) {
+      console.error("Unable to a user with same username", err);
+    } else {
+      console.log("Found user inforamtion", data.Item);
+      console.log("His password is : ", data.Item.Password);
+    }
+  });
+
+
+
+
+
     getUser(username);
-    
+
 
     let user = users.find(user => user.username == username)
     if(user == null){
