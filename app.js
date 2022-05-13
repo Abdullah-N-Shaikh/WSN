@@ -119,13 +119,6 @@ let authenticateUser = async function(username, password, done) {
     } else {
       console.log("Found user inforamtion", data.Item);
       console.log("His password is : ", data.Item.Password.S);
-      if(await bcrypt.compare(password, data.Item.Password.S)){
-        console.log("User has been authenticated")
-        return done(null, username)
-    } else {
-        console.log("Wrong information")
-        return done(null, false, {message: 'Password incorrect!'})
-    }
     }
   });
 
