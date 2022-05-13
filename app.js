@@ -118,7 +118,7 @@ let authenticateUser = async function(username, password, done) {
       console.error("Unable to a user with same username", err);
     } else {
       console.log("Found user inforamtion", data.Item);
-      console.log("His password is : ", data.Item.Password.data);
+      console.log("His password is : ", data.Item.Password.S);
     }
   });
 
