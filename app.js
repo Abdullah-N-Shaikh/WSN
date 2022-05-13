@@ -119,7 +119,25 @@ let authenticateUser = async function(username, password, done) {
     } else {
       console.log("Found user inforamtion", data.Item);
       console.log("His password is : ", data.Item.Password.S);
+    // // getUser(username);
 
+
+    let user = users.find(user => user.username == username)
+    // if(user == null){
+    //     return done(null, false, {message: 'No such user!'})
+    // }
+    // User exists. Check password
+    try {
+      if(await bcrypt.compare(password, data.Item.Password.S)){
+          console.log("User has been authenticated")
+          return done(null, username)
+      } else {
+          console.log("Wrong information entered")
+          return done(null, false, {message: 'Password incorrect!'})
+      }
+  } catch(err) {
+      return done(err)
+  }
     }
   });
 
@@ -127,25 +145,7 @@ let authenticateUser = async function(username, password, done) {
 
 
 
-    // // getUser(username);
 
-
-    // let user = users.find(user => user.username == username)
-    // if(user == null){
-    //     return done(null, false, {message: 'No such user!'})
-    // }
-    // User exists. Check password
-    try {
-        if(await bcrypt.compare(password, data.Item.Password.S)){
-            console.log("User has been authenticated")
-            return done(null, username)
-        } else {
-            console.log("Wrong information entered")
-            return done(null, false, {message: 'Password incorrect!'})
-        }
-    } catch(err) {
-        return done(err)
-    }
 }
 
 passport.use(new Local_Strategy({ usernameField: 'username'}, authenticateUser))
