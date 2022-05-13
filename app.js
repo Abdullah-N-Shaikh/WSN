@@ -32,7 +32,7 @@ function addUser(username, password) {
 	  TableName: "UserInfo",
 	  Item: {
 		ID: { S: "1" },
-		Username: { N: username },
+		Username: { S: username },
 		Password: {S: password}
 	  },
 	};
