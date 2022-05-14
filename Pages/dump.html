@@ -1,17 +1,18 @@
 function addUser(title, rtScore) {
 	const params = {
-	  TableName: "Movies",
+	  TableName: "UserInfo",
 	  Item: {
-		title: { S: title },
-		rtScore: { N: rtScore },
+		ID: { S: "1" },
+		Username: { N: username },
+		Password: {S: password}
 	  },
 	};
   
 	DynamoDB.putItem(params, function(err) {
 	  if (err) {
-		console.error("Unable to add movie", err);
+		console.error("Unable to add User", err);
 	  } else {
-		console.log(`Added ${title} with a Rotten Tomatoes Score of ${rtScore}%`);
+		console.log(`Added ${Username} with password of ${Password}%`);
 	  }
 	});
   }

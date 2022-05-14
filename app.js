@@ -76,11 +76,27 @@ function addUser(username, password) {
       TableName: dynamodbTableName
     }
     try {
-      const allProducts = await scanDynamoRecords(params, []);
+      const SensorDataAll = await scanDynamoRecords(params, []);
       // const body = {
-      //   products: allProducts
+      //   products: SensorDataAll
       // }
-      res.json(allProducts);
+      res.json(SensorDataAll);
+    } catch(error) {
+      console.error('Do your custom error handling here. I am just ganna log it out: ', error);
+      res.status(500).send(error);
+    }
+  })
+
+  app.post('/allUsers', async (req, res) => {
+    const params = {
+      TableName: "UserDB"
+    }
+    try {
+      const SensorDataAll = await scanDynamoRecords(params, []);
+      // const body = {
+      //   products: SensorDataAll
+      // }
+      res.json(SensorDataAll);
     } catch(error) {
       console.error('Do your custom error handling here. I am just ganna log it out: ', error);
       res.status(500).send(error);
@@ -119,6 +135,7 @@ let authenticateUser = async function(username, password, done) {
     } else {
       console.log("Found user inforamtion", data.Item);
       console.log("His password is : ", data.Item.Password.S);
+      return data.Item.Password.S;
     }
   });
 

@@ -43,7 +43,7 @@ background-color: #dddddd;
 
     <title>Sensor Data</title>
     <script>
-      function runCode() {
+      function getAllData() {
           let request = {
           method: 'POST',
           headers: {
@@ -100,7 +100,7 @@ function addAllColumnHeaders(myList)
 
 <script>
   function nodeData(node) {
-      console.log("inside runCodeSpecifc");
+      console.log("inside getAllDataSpecifc");
       //Clear the table
       var Table = document.getElementById("excelDataTable");
       Table.innerHTML = "";
@@ -223,7 +223,7 @@ function addAllColumnHeaders(myList)
       </nav>
     <h1>Click one of the buttons to show some data</h1>
     <br></br>
-    <button onclick="runCode()">Show all data on the database</button>
+    <button onclick="getAllData()">Show all data on the database</button>
     <br></br>
     <button value="Node0" onclick="nodeData(this.value)">Show all Node0 data</button>
     <button value="Node1" onclick="nodeData(this.value)">Show all Node1 data</button>
@@ -237,7 +237,7 @@ function addAllColumnHeaders(myList)
 
 
 <!-- 
-    <form onclick="runCodeSpecifc()">
+    <form onclick="getAllDataSpecifc()">
       <label>Type reading number you want to display:
         <input type = "text" name="Y"  id="Y"></input>
         </label>

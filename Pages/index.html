@@ -5,6 +5,61 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <script>
+      function getAllUserData() {
+          let request = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify("dataTest")
+        }
+        fetch('/allUsers', request).then( res => res.json() )
+        .then( myList => {
+
+
+          var columns = addAllColumnHeaders(myList);
+ 
+ for (var i = 0 ; i < myList.length ; i++) {
+     var row$ = $('<tr/>');
+     for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
+         var cellValue = myList[i][columns[colIndex]];
+
+         if (cellValue == null) { cellValue = ""; }
+
+         row$.append($('<td/>').html(cellValue));
+     }
+     $("#excelDataTable").append(row$);
+ }
+
+
+// Adds a header row to the table and returns the set of columns.
+// Need to do union of keys from all records as some records may not contain
+// all records
+function addAllColumnHeaders(myList)
+{
+ var columnSet = [];
+ var headerTr$ = $('<tr/>');
+
+ for (var i = 0 ; i < myList.length ; i++) {
+     var rowHash = myList[i];
+     for (var key in rowHash) {
+         if ($.inArray(key, columnSet) == -1){
+             columnSet.push(key);
+             headerTr$.append($('<th/>').html(key));
+         }
+     }
+ }
+ $("#excelDataTable").append(headerTr$);
+
+ return columnSet;
+}
+
+          document.getElementById('result').innerHTML = JSON.stringify(data);
+        })
+        .catch( err => console.log(err) )
+      }
+  </script>
 	<!-- CSS -->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -24,12 +79,15 @@
             <li class="active"><a href="/">Home</a></li>
               <li><a href="/dashboard">Dashboard</a></li>
               <li><a href="/data">Sensor Data</a></li>
-              <li><a href="/logout">LogOut</a></li>
-
-  
+              <li><a href="/logout">LogOut</a></li>  
           </ul>
         </div>
       </nav>
+
     <h1>Index Page</h1>
+    <button onclick="getAllUserData()">Show all Users</button>
+
+    <table id="excelDataTable" border="1">
+    </table>
 </body>
 </html>
