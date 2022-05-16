@@ -23,7 +23,7 @@ AWS.config.update({
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 const DynamoDB = new AWS.DynamoDB();
 
-const dynamodbTableName = 'Sensor';
+const dynamodbTableName = 'SensorData';
 
 
 function addUser(username, password) {
