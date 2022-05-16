@@ -44,6 +44,7 @@ background-color: #dddddd;
     <title>Sensor Data</title>
     <script>
       function getAllData() {
+        var Table = document.getElementById("excelDataTable");
         Table.innerHTML = "";
           let request = {
           method: 'POST',
