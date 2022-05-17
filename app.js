@@ -25,7 +25,7 @@ const DynamoDB = new AWS.DynamoDB();
 
 const dynamodbTableName = 'SensorData';
 
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(__dirname + '/img/'));
 
 function addUser(username, password) {
   console.log("inside adduser funcion")
