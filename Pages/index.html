@@ -114,17 +114,14 @@
           </ul>
         </div>
       </nav>
-    <br></br>
     <h1>Project description</h1>
     <br></br>
     <p>
       The purpose of this project is to develop a Wireless Sensor Network (WSN) that have many sensor nodes communicating through Zigbee protocol. A Cloud based website using (AWS) was developed to have real time monitoring and storing sensor data. In this project the data is collected from a sensor connected to an Arduino. These sensor nodes are working in a mesh topology so if a sensor node is far away from the gateway it can relay its data to any sensor node around it and that sensor node will relay it to the gateway. The gateway node is connected to a Raspberry pi to collect and work on the data before sending to the AWS cloud platform. In the AWS cloud platform, we are using DynamoDB to store sensor data and Elastic Beanstalk as a Node JS container for our website and CloudWatch to have a realtime monitoring dashboard. The focus of this project in COE588 is to develop the cloud-based website to have a Real time monitoring dashboard using CloudWatch, storing and showing the sensor data from DynamoDB. The backend was developed using Express and Node JS, while the frontend was developed with HTML, CSS and JavaScript. Also, an authentication mechanism using Passport JS was used to authenticate the users using the website. Moreover, AWS CodePipeline was used to automate the deploying of our code from VS Code to GitHub repository then the CodePipeline will take it from GitHub and deploy it on Elastic Beanstalk Node JS container, so by only pushing the code into GitHub it will be deployed on the container. 
       </p>
-    <img src="img/WSN_DIGRAM.png" alt="System Architecture 1">
-    <img src="/WSN_DIGRAM.png" alt="System Architecture 2">
-    <img src="WSN_DIGRAM.png" alt="System Architecture 3">
-    <img src="./WSN_DIGRAM.png" alt="System Architecture 4">
-    <img src="/img/WSN_DIGRAM.png" alt="System Architecture 5">
+    <h1>System Architecture</h1>
+    <img src="/WSN_DIGRAM.png" alt="System Architecture 2" style=  "max-width: 70%; height: auto;">
+
 
 
 
