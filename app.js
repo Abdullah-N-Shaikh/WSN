@@ -17,6 +17,23 @@ const Local_Strategy = require('passport-local').Strategy
 
 
 const AWS = require('aws-sdk');
+
+
+// testing the lambda function
+console.log("Start testing Lambda Function");
+var lambda = new AWS.Lambda();
+var params = {
+  FunctionName: 'PublishMQTT', /* required */
+  Payload: "Here is the payload from the webserver"
+};
+lambda.invoke(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});
+console.log("End testing Lambda Function");
+
+
+
 AWS.config.update({
     region: 'me-south-1'
   });
