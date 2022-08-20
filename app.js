@@ -18,7 +18,6 @@ const Local_Strategy = require('passport-local').Strategy
 
 const AWS = require('aws-sdk');
 
-
 // testing the lambda function
 console.log("Start testing Lambda Function");
 var lambda = new AWS.Lambda();
