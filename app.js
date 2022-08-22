@@ -19,11 +19,11 @@ const Local_Strategy = require('passport-local').Strategy
 const AWS = require('aws-sdk');
 //for mqtt
 var awsIot = require('aws-iot-device-sdk');
-console.log("The path should i use is ",path.resolve(__dirname));
+console.log("The path should i use is "+path.resolve(__dirname));
 const device = awsIot.device({
-  keyPath: path.resolve(__dirname, './certs/private.pem.key'),
-  certPath: path.resolve(__dirname, './certs/certificate.pem.crt'),
-  caPath: path.resolve(__dirname, './certs/AmazonRootCA1.pem'),
+  keyPath: path.resolve(__dirname, '/certs/private.pem.key'),
+  certPath: path.resolve(__dirname, '/certs/certificate.pem.crt'),
+  caPath: path.resolve(__dirname, '/certs/AmazonRootCA1.pem'),
   clientId: "Web",
   host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
 });
