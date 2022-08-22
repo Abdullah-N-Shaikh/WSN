@@ -21,9 +21,9 @@ const AWS = require('aws-sdk');
 var awsIot = require('aws-iot-device-sdk');
 
 var device = awsIot.device({
-  keyPath: "AWS/private.pem.key",
- certPath: "AWS/certificate.pem.crt",
-   caPath: "AWS/AmazonRootCA1.pem",
+  keyPath: "/private.pem.key",
+ certPath: "/certificate.pem.crt",
+   caPath: "/AmazonRootCA1.pem",
  clientId: "Web",
      host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
 });
