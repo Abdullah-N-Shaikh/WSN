@@ -17,9 +17,16 @@ const Local_Strategy = require('passport-local').Strategy
 
 
 const AWS = require('aws-sdk');
+//for mqtt
+var awsIot = require('aws-iot-device-sdk');
 
-
-
+var device = awsIot.device({
+  keyPath: "AWS/private.pem.key",
+ certPath: "AWS/certificate.pem.crt",
+   caPath: "AWS/AmazonRootCA1.pem",
+ clientId: "Web",
+     host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
+});
 
 
 AWS.config.update({
@@ -76,6 +83,26 @@ function addUser(username, password) {
 //       res.status(500).send(error);
 //     })
 //   })
+
+
+app.post('/mqtt', async (req, res) => {
+   
+
+            // testing the lambda function
+            console.log("Start testing Lambda Function");
+            var lambda = new AWS.Lambda();
+            var paramss = {
+              FunctionName: 'PublishMQTT', /* required */
+              Payload: "Here is the payload from the webserver"
+            };
+            lambda.invoke(paramss, function(err, data) {
+              if (err) console.log(err, err.stack); // an error occurred
+              else     console.log(data);           // successful response
+            });
+            console.log("End testing Lambda Function");
+          })
+
+
   
   app.post('/all', async (req, res) => {
     const params = {
@@ -99,22 +126,36 @@ function addUser(username, password) {
     }
     try {
 
-            // testing the lambda function
-      console.log("Start testing Lambda Function");
-      var lambda = new AWS.Lambda();
-      var paramss = {
-        FunctionName: 'PublishMQTT', /* required */
-        Payload: "Here is the payload from the webserver"
-      };
-      lambda.invoke(paramss, function(err, data) {
-        if (err) console.log(err, err.stack); // an error occurred
-        else     console.log(data);           // successful response
-      });
-      console.log("End testing Lambda Function");
       const SensorDataAll = await scanDynamoRecords(params, []);
       // const body = {
       //   products: SensorDataAll
       // }
+
+
+
+// testing for mqtt
+console.log("Start testing MQTT Function");
+
+      
+device
+.on('connect', function() {
+  console.log('connect');
+  // device.subscribe('topic_1');
+  device.publish('home/helloworld', JSON.stringify({ test_data: 1}));
+});
+
+device
+.on('message', function(topic, payload) {
+  console.log('message', topic, payload.toString());
+});
+
+
+
+
+
+
+
+
       res.json(SensorDataAll);
     } catch(error) {
       console.error('Do your custom error handling here. I am just ganna log it out: ', error);
