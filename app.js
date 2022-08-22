@@ -15,6 +15,7 @@ const port = process.env.PORT || 3000;
 const passport = require('passport')
 const Local_Strategy = require('passport-local').Strategy 
 
+const path = require('path');
 
 const AWS = require('aws-sdk');
 //for mqtt
