@@ -139,17 +139,17 @@ const device = awsIot.device({
 });
 console.log("Connected ... ");
 
-device
-.on('connect', function() {
-  console.log('connect');
-  // device.subscribe('topic_1');
-  device.publish('home/helloworld', JSON.stringify({ test_data: 1}));
-});
+// device
+// .on('connect', function() {
+//   console.log('connect');
+//   // device.subscribe('topic_1');
+//   device.publish('home/helloworld', JSON.stringify({ test_data: 1}));
+// });
 
-device
-.on('message', function(topic, payload) {
-  console.log('message', topic, payload.toString());
-});
+// device
+// .on('message', function(topic, payload) {
+//   console.log('message', topic, payload.toString());
+// });
 
 
 
