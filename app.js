@@ -20,12 +20,12 @@ const AWS = require('aws-sdk');
 //for mqtt
 var awsIot = require('aws-iot-device-sdk');
 
-var device = awsIot.device({
-  keyPath: "__dirname/private.pem.key",
- certPath: "__dirname/certificate.pem.crt",
-   caPath: "__dirname/AmazonRootCA1.pem",
- clientId: "Web",
-     host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
+const device = awsIot.device({
+  keyPath: path.resolve(__dirname, './private.pem.key'),
+  certPath: path.resolve(__dirname, './certificate.pem.crt'),
+  caPath: path.resolve(__dirname, './AmazonRootCA1.pem'),
+  clientId: "Web",
+  host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
 });
 
 
