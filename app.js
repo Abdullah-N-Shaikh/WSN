@@ -20,6 +20,29 @@ const path = require('path');
 const AWS = require('aws-sdk');
 //for mqtt
 var awsIot = require('aws-iot-device-sdk');
+// test mqtt
+
+const device = awsIot.device({
+  keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
+  certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
+  caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
+  clientId: "Web",
+  host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
+});
+console.log("Connected ... ");
+
+device
+.on('connect', function() {
+  console.log('connect');
+  // device.subscribe('topic_1');
+  device.publish('home/helloworld', JSON.stringify({ test_data: 199}));
+});
+
+device
+.on('message', function(topic, payload) {
+  console.log('message', topic, payload.toString());
+});
+
 
 
 
@@ -130,14 +153,14 @@ app.post('/mqtt', async (req, res) => {
 // testing for mqtt
 console.log("Start testing MQTT Function");
 // console.log("The path should i use is "+path.resolve(__dirname));
-const device = awsIot.device({
-  keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
-  certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
-  caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
-  clientId: "Web",
-  host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
-});
-console.log("Connected ... ");
+// const device = awsIot.device({
+//   keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
+//   certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
+//   caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
+//   clientId: "Web",
+//   host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
+// });
+// console.log("Connected ... ");
 
 // device
 // .on('connect', function() {
