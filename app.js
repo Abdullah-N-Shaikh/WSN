@@ -289,6 +289,10 @@ app.get('/manageNetwork', checkAuthenticated, (req, res) => {
   res.sendFile('Pages/manageNetwork.html', {root: __dirname})
 })
 
+app.get('/map', checkAuthenticated, (req, res) => {
+  res.sendFile('Pages/map.html', {root: __dirname})
+})
+
 app.get('/login', checkNotAuthenticated, (req, res) => {
     res.sendFile('Pages/login.html', {root: __dirname})
 })
