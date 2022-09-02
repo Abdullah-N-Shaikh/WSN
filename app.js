@@ -34,12 +34,13 @@ console.log("Connected ... ");
 device
 .on('connect', function() {
   console.log('connect');
-  // device.subscribe('topic_1');
-  device.publish('home/helloworld', JSON.stringify({ test_data: 199}));
+  device.subscribe('wsn/AddNode');
+  device.publish('home/helloworld', JSON.stringify({ test_data: "from Website to MQTT Broker or Raspberry Pi"}));
 });
 
 device
 .on('message', function(topic, payload) {
+  console.log('We got a message from wsn/AddNode');
   console.log('message', topic, payload.toString());
 });
 
