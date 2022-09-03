@@ -16,7 +16,7 @@
           ResultData.innerHTML = "";
 
           //for mqtt
-          var awsIot = requirejs('aws-iot-device-sdk');
+          var awsIot = requirejs(['aws-iot-device-sdk']);
           // test mqtt
 
           const device = awsIot.device({
