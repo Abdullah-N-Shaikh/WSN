@@ -97,7 +97,7 @@
           
           console.log(JSON.stringify(document.getElementsByName('macaddress')[0].value))
 
-          fetch('/addnodebymac', request).then( res => res.json() )
+          fetch('/addnodebymac', request).then( res => res.json.stringify() )
             .then( data => {
               document.getElementById('result').innerHTML = data.result;
             })
