@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <script src="https://github.com/aws/aws-iot-device-sdk-js.git"></script>
 
 
     <script>
@@ -16,7 +17,7 @@
           ResultData.innerHTML = "";
 
           //for mqtt
-          var awsIot = require(['aws-iot-device-sdk']);
+          var awsIot = require('aws-iot-device-sdk');
           // test mqtt
 
           const device = awsIot.device({
