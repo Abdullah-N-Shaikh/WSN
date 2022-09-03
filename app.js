@@ -106,7 +106,8 @@ app.post('/addnodebymac', (req, res) => {
   let x = req.body.macaddress
   let result = x
   console.log(req.body.macaddress);
-  res.send({result : result})
+  res.json({result : result})
+
 })
 
 app.post('/addnode', async (req, res) => {
