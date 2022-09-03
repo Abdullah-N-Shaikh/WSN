@@ -105,8 +105,8 @@ function addUser(username, password) {
 app.post('/addnodebymac', (req, res) => {
   let x = req.body.macaddress
   let result = x
-  console.log(result)
-  res.send({"result": json.stringify(result)})
+  console.log(req.body.macaddress);
+  res.send({result : result})
 })
 
 app.post('/addnode', async (req, res) => {
