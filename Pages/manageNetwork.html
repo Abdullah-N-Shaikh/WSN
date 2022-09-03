@@ -71,9 +71,44 @@
     <h1>Manage Network</h1>
     <h1>Adding a node to the network</h1>
 
+
+    <form id="myForm">
+      <label>Enter node mac address to be added : </label>
+      <input type="text" name="macaddress"><br>
+      <input type="submit" value="Submit">
+  </form> 
+
+  Result: </h2> 
+  <div id="result"></div>
+
+  <script>
+      myForm.addEventListener('submit', e => {
+          e.preventDefault()
+          
+          
+          
+          let request = {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(document.getElementsByName('macaddress')[0].value)
+          }
+          
+          console.log(JSON.stringify(document.getElementsByName('macaddress')[0].value))
+
+          fetch('/addnodebymac', request).then( res => res.json() )
+            .then( data => {
+              document.getElementById('result').innerHTML = data.result;
+            })
+            .catch( err => console.log(err) )
+      })
+  </script>
+<!-- 
+
       <label for="addnodelabel"> Please enter the node MAC Address to add it to the network:</label>
       <input type="text" id="addnodemac" name="addnodemac" required>
-      <button value="0" onclick="addnode(document.getElementsByName('addnodemac')[0].value)">Add node</button>
+      <button value="0" onclick="addnode(document.getElementsByName('addnodemac')[0].value)">Add node</button> -->
     <br></br>
     <h1>Removing a node from the network</h1>
 
