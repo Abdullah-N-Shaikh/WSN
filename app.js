@@ -10,7 +10,8 @@ const session = require('express-session')
 const app = express()
 const port = process.env.PORT || 3000;
 // app.use(flash());
-
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 // Passport 
 const passport = require('passport')
 const Local_Strategy = require('passport-local').Strategy 
