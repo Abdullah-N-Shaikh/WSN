@@ -6,37 +6,53 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+    <script>
+      function addnode(node) {
+          console.log("inside addnode , mac address is ",node);
+          //Clear the result
+          var ResultData = document.getElementById("result");
+          ResultData.innerHTML = "";
 
+          //for mqtt
+          var awsIot = require('aws-iot-device-sdk');
+          // test mqtt
+
+          const device = awsIot.device({
+            keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
+            certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
+            caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
+            clientId: "Web",
+            host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
+          });
+          console.log("Connected ... to AWS  ");
+
+          device
+          .on('connect', function() {
+            console.log('connect');
+            device.subscribe('wsn/AddNodeStatus');
+            device.publish('wsn/addnode', JSON.stringify({ mac: node}));
+          });
+// this function will triggred once we recive a msg from raspberry pi
+          device
+          .on('message', function(topic, payload) {
+            console.log('We got a message from wsn/AddNodeStatus');
+            console.log('message', topic, payload.toString());
+            document.getElementById('result').innerHTML = JSON.stringify(payload.toString());
+          });
+
+     }
+    </script>
+    
+
+
+
+  
 	<!-- CSS -->
   <style>
-table {
-
-font-family: arial, sans-serif;
-
-border-collapse: collapse;
-
-width: 100%;
-
-}
-
-
-td, th {
-
-border: 1px solid #dddddd;
-
-text-align: left;
-
-padding: 8px;
-
-}
-
-
-tr:nth-child(even) {
-
-background-color: #dddddd;
-
-}
   </style>
+
+
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="/css/main.css">
@@ -61,7 +77,24 @@ background-color: #dddddd;
         </div>
       </nav>
     <h1>Manage Network</h1>
+    <h1>Adding a node to the network</h1>
 
+      <label for="addnodelabel"> Please enter the node MAC Address to add it to the network:</label>
+      <input type="text" id="addnodemac" name="addnodemac" required>
+      <button value="0" onclick="addnode(document.getElementsByName('addnodemac')[0].value)">Add node</button>
+    <br></br>
+    <h1>Removing a node from the network</h1>
+
+    <form action="/delnode" method="GET">
+      <label for="delnodelabel"> Please enter the node MAC Address to remove it from the network:</label>
+          <input type="text" id="delnode" name="delnode" required>
+      <button type="submit">Submit</button>  
+  </form>
+
+
+  <!-- document.getElementById('result').innerHTML = JSON.stringify(data); -->
+
+  <div id="result"></div>
 
 </body>
 </html>
