@@ -290,7 +290,7 @@ app.get('/manageNetwork', checkAuthenticated, (req, res) => {
 })
 
 app.get('/map', checkAuthenticated, (req, res) => {
-  res.sendFile('Pages/map.html', {root: __dirname})
+  res.sendFile('Pages/NetworkMap.html', {root: __dirname})
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
