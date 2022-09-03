@@ -19,7 +19,7 @@ const path = require('path');
 
 const AWS = require('aws-sdk');
 // //for mqtt
-// var awsIot = require('aws-iot-device-sdk');
+var awsIot = require('aws-iot-device-sdk');
 // // test mqtt
 
 // const device = awsIot.device({
@@ -102,6 +102,36 @@ function addUser(username, password) {
 //     })
 //   })
 
+
+
+app.post('/addnode', async (req, res) => {
+  
+let Nodemac= reg.body.mac
+
+const device = awsIot.device({
+  keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
+  certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
+  caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
+  clientId: "Web",
+  host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
+});
+console.log("Connected ... ");
+
+device
+.on('connect', function() {
+  console.log('connect');
+  device.subscribe('wsn/AddNodeStatus');
+  device.publish('wsn/addnodemac', JSON.stringify({ mac: Nodemac}));
+});
+
+device
+.on('message', function(topic, payload) {
+  console.log('We got a message from wsn/AddNodeStatus');
+  console.log('message', topic, payload.toString());
+});
+
+  res.send({"result": "node is added"})
+})
 
 app.post('/mqtt', async (req, res) => {
    
