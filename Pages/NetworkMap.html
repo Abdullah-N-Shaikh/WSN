@@ -15,29 +15,7 @@
 	<!-- CSS -->
   <style>
 
-#map { height: 180px; }
-
-table {
-
-font-family: arial, sans-serif;
-
-border-collapse: collapse;
-
-width: 100%;
-
-}
-
-
-td, th {
-
-border: 1px solid #dddddd;
-
-text-align: left;
-
-padding: 8px;
-
-}
-
+#map { height: 900px; }
 
 tr:nth-child(even) {
 
@@ -84,15 +62,15 @@ background-color: #dddddd;
 
    
 <script>
-  var map = L.map('map').setView([51.505, -0.09], 13);
+  var map = L.map('map').setView([40.73618, -73.97545], 13);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-var marker = L.marker([51.5, -0.09]).addTo(map);
+var marker = L.marker([40.79618, -73.97545]).addTo(map);
 
-var circle = L.circle([51.508, -0.11], {
+var circle = L.circle([40.73618, -73.97545], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
