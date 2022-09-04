@@ -12,6 +12,8 @@ const port = process.env.PORT || 3000;
 // app.use(flash());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+
+
 // Passport 
 const passport = require('passport')
 const Local_Strategy = require('passport-local').Strategy 
@@ -104,9 +106,9 @@ function addUser(username, password) {
 //   })
 
 app.post('/addnodebymac', (req, res) => {
-  let x = req.body.macaddress
+  let x = req.body
   let result = x
-  console.log(req.body.macaddress);
+  console.log(req.body);
   res.json({ result: 'geek' })
 })
 
@@ -293,9 +295,7 @@ passport.deserializeUser((id, done) => {
 // Emulate database
 const users = []  // Do not use in production!
 
-//Middleware
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
+
 
 // Session
 app.use(session({

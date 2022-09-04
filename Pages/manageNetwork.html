@@ -25,7 +25,7 @@
             
             console.log(JSON.stringify({mac : node}))
 
-            fetch('/addnode', request).then( res => res.json() )
+            fetch('/addnodebymac', request).then( res => res.json() )
               .then( data => {
                 document.getElementById('result').innerHTML = data.result;
               })
