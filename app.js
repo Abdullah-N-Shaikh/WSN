@@ -108,9 +108,7 @@ function addUser(username, password) {
 //   })
 
 app.post('/addnewnode', (req, res) => {
-  let x = req.body.X
-  let y = req.body.Y
-  let result = Number( x ) + Number( y )
+  let result = req.body.X
   console.log(result)
   res.send({"result": result})
 })

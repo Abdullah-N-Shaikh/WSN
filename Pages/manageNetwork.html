@@ -69,16 +69,11 @@
         </div>
       </nav>
     <h1>Manage Network</h1>
-    <h1>Adding a node to the network</h1>
 
-    <h1>Just Add!</h1>
-    <p>Invest in our product!</p>
 
     <form id="myForm">
-        <label>X: </label>
+        <label>Enter MacAddress of the node you want to add: </label>
         <input type="text" name="X"><br>
-        <label>Y: </label>
-        <input type="text" name="Y"><br><br>
         <input type="submit" value="Submit">
     </form> 
 
@@ -89,18 +84,18 @@
         myForm.addEventListener('submit', e => {
             e.preventDefault()
             
-            let numbers = {}
-            new FormData(myForm).forEach( (value, key) => numbers[key] = value)
+            let NodeMacToBeADD = {}
+            new FormData(myForm).forEach( (value, key) => NodeMacToBeADD[key] = value)
             
             let request = {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(numbers)
+                body: JSON.stringify(NodeMacToBeADD)
             }
             
-            console.log(JSON.stringify(numbers))
+            console.log(JSON.stringify(NodeMacToBeADD))
 
             fetch('/addnewnode', request).then( res => res.json() )
               .then( data => {
