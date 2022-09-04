@@ -106,6 +106,7 @@ function addUser(username, password) {
 //   })
 
 app.post('/addnodebymac', (req, res) => {
+  console.log("Inside addnode from app.js and re.body is ", reg.body)
   let x = req.body
   let result = x
   console.log(req.body);
