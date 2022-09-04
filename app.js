@@ -59,6 +59,8 @@ const DynamoDB = new AWS.DynamoDB();
 const dynamodbTableName = 'SensorData';
 
 app.use(express.static(__dirname + '/img/'));
+app.use(express.static('Pages'))
+
 
 function addUser(username, password) {
   console.log("inside adduser funcion")
@@ -104,6 +106,14 @@ function addUser(username, password) {
 //       res.status(500).send(error);
 //     })
 //   })
+
+app.post('/addnewnode', (req, res) => {
+  let x = req.body.X
+  let y = req.body.Y
+  let result = Number( x ) + Number( y )
+  console.log(result)
+  res.send({"result": result})
+})
 
 app.post('/addnodebymac', (req, res) => {
   console.log("Inside addnode from app.js and re.body is ", reg.body)
