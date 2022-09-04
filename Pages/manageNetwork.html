@@ -75,12 +75,10 @@
     <p>Invest in our product!</p>
 
     <form id="myForm">
-        <label>X: </label>
-        <input type="text" name="X"><br>
-        <label>Y: </label>
-        <input type="text" name="Y"><br><br>
-        <input type="submit" value="Submit">
-    </form> 
+      <label>Enter node mac address to be added : </label>
+      <input type="text" name="macaddress"><br>
+      <input type="submit" value="Submit">
+  </form> 
 
     Result: </h2> 
     <div id="result"></div>
@@ -89,18 +87,16 @@
         myForm.addEventListener('submit', e => {
             e.preventDefault()
             
-            let numbers = {}
-            new FormData(myForm).forEach( (value, key) => numbers[key] = value)
             
             let request = {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(numbers)
+                body: {"MacAddress": document.getElementsByName('macaddress')[0].value}
             }
             
-            console.log(JSON.stringify(numbers))
+            
 
             fetch('/addnewnode', request).then( res => res.json() )
               .then( data => {
