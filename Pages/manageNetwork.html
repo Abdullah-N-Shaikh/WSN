@@ -87,16 +87,18 @@
         myForm.addEventListener('submit', e => {
             e.preventDefault()
             
-
+            let numbers = {}
+            new FormData(myForm).forEach( (value, key) => numbers[key] = value)
             
             let request = {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify("Hi")
+                body: JSON.stringify(numbers)
             }
             
+            console.log(JSON.stringify(numbers))
 
             fetch('/addnewnode', request).then( res => res.json() )
               .then( data => {
