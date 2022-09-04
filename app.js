@@ -109,6 +109,30 @@ function addUser(username, password) {
 
 app.post('/addnewnode', (req, res) => {
   let result = req.body.X
+
+  const device = awsIot.device({
+    keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
+    certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
+    caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
+    clientId: "Web",
+    host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
+  });
+  console.log("addnewnode ... Connected ... ");
+  
+  device
+  .on('connect', function() {
+    console.log('connect');
+    device.subscribe('wsn/AddNodeStatus');
+    device.publish('wsn/addnodemac', JSON.stringify({ mac: result}));
+  });
+  
+  device
+  .on('message', function(topic, payload) {
+    console.log('We got a message from wsn/AddNodeStatus');
+    console.log('message', topic, payload.toString());
+    res.send({"result": "Node has been added"})
+  });
+
   console.log(result)
   res.send({"result": result})
 })
