@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
 
-
+<!-- 
     <script>
       function addnode(node) {
           console.log("inside addnode  from manageNetwork, mac address is ",node);
@@ -34,7 +34,7 @@
 
      }
     </script>
-    
+     -->
 
 
 
@@ -84,9 +84,7 @@
   <script>
       myForm.addEventListener('submit', e => {
           e.preventDefault()
-          
-          
-          
+    
           let request = {
               method: 'POST',
               headers: {
@@ -95,7 +93,7 @@
               body: document.getElementsByName('macaddress')[0].value
           }
           
-          console.log(document.getElementsByName('macaddress')[0].value)
+          console.log("Mac Address form script is ",document.getElementsByName('macaddress')[0].value)
 
           fetch('/addnodebymac', request).then( res => res.json() )
             .then( data => {
