@@ -87,13 +87,14 @@
         myForm.addEventListener('submit', e => {
             e.preventDefault()
             
+
             
             let request = {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
                 },
-                body: {"X":"5","Y":"6"}
+                body: JSON.stringify("Hi")
             }
             
 
