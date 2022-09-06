@@ -137,59 +137,59 @@ app.post('/addnewnode', (req, res) => {
   res.send({"result": result})
 })
 
-app.post('/addnodebymac', (req, res) => {
-  console.log("Inside addnode from app.js and re.body is ", reg.body)
-  let x = req.body
-  let result = x
-  console.log(req.body);
-  res.json({ result: 'geek' })
-})
+// app.post('/addnodebymac', (req, res) => {
+//   console.log("Inside addnode from app.js and re.body is ", reg.body)
+//   let x = req.body
+//   let result = x
+//   console.log(req.body);
+//   res.json({ result: 'geek' })
+// })
 
-app.post('/addnode', async (req, res) => {
+// app.post('/addnode', async (req, res) => {
   
-let Nodemac= reg.body.mac
+// let Nodemac= reg.body.mac
 
-const device = awsIot.device({
-  keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
-  certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
-  caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
-  clientId: "Web",
-  host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
-});
-console.log("Connected ... ");
+// // const device = awsIot.device({
+// //   keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
+// //   certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
+// //   caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
+// //   clientId: "Web",
+// //   host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
+// // });
+// // console.log("Connected ... ");
 
-device
-.on('connect', function() {
-  console.log('connect');
-  device.subscribe('wsn/AddNodeStatus');
-  device.publish('wsn/addnodemac', JSON.stringify({ mac: Nodemac}));
-});
+// // device
+// // .on('connect', function() {
+// //   console.log('connect');
+// //   device.subscribe('wsn/AddNodeStatus');
+// //   device.publish('wsn/addnodemac', JSON.stringify({ mac: Nodemac}));
+// // });
 
-device
-.on('message', function(topic, payload) {
-  console.log('We got a message from wsn/AddNodeStatus');
-  console.log('message', topic, payload.toString());
-});
+// // device
+// // .on('message', function(topic, payload) {
+// //   console.log('We got a message from wsn/AddNodeStatus');
+// //   console.log('message', topic, payload.toString());
+// // });
 
-  res.send({"result": "node is added"})
-})
+//   res.send({"result": "node is added"})
+// })
 
-app.post('/mqtt', async (req, res) => {
+// app.post('/mqtt', async (req, res) => {
    
 
-            // testing the lambda function
-            console.log("Start testing Lambda Function");
-            var lambda = new AWS.Lambda();
-            var paramss = {
-              FunctionName: 'PublishMQTT', /* required */
-              Payload: "Here is the payload from the webserver"
-            };
-            lambda.invoke(paramss, function(err, data) {
-              if (err) console.log(err, err.stack); // an error occurred
-              else     console.log(data);           // successful response
-            });
-            console.log("End testing Lambda Function");
-          })
+//             // testing the lambda function
+//             console.log("Start testing Lambda Function");
+//             var lambda = new AWS.Lambda();
+//             var paramss = {
+//               FunctionName: 'PublishMQTT', /* required */
+//               Payload: "Here is the payload from the webserver"
+//             };
+//             lambda.invoke(paramss, function(err, data) {
+//               if (err) console.log(err, err.stack); // an error occurred
+//               else     console.log(data);           // successful response
+//             });
+//             console.log("End testing Lambda Function");
+//           })
 
 
   
