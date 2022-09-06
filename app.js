@@ -124,6 +124,7 @@ app.post('/addnewnode', (req, res) => {
     console.log('connect');
     device.subscribe('wsn/AddNodeStatus');
     device.publish('wsn/addnodemac', JSON.stringify({ mac: result}));
+    
   });
   
   device
