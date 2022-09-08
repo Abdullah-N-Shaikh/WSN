@@ -25,27 +25,27 @@ const AWS = require('aws-sdk');
 var awsIot = require('aws-iot-device-sdk');
 // // test mqtt
 
-// const device = awsIot.device({
-//   keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
-//   certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
-//   caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
-//   clientId: "Web",
-//   host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
-// });
-// console.log("Connected ... ");
+const device = awsIot.device({
+  keyPath: path.resolve(__dirname + '/certs/private.pem.key'),
+  certPath: path.resolve(__dirname + '/certs/certificate.pem.crt'),
+  caPath: path.resolve(__dirname + '/certs/AmazonRootCA1.pem'),
+  clientId: "Web2",
+  host: "a3txg7vsallna2-ats.iot.us-east-1.amazonaws.com"
+});
+console.log("Connected ... for the app.js ");
 
-// device
-// .on('connect', function() {
-//   console.log('connect');
-//   device.subscribe('wsn/AddNode');
-//   device.publish('home/helloworld', JSON.stringify({ test_data: "from Website to MQTT Broker or Raspberry Pi"}));
-// });
+device
+.on('connect', function() {
+  console.log('connect');
+  device.subscribe('wsn/AddNode');
+});
 
-// device
-// .on('message', function(topic, payload) {
-//   console.log('We got a message from wsn/AddNode');
-//   console.log('message', topic, payload.toString());
-// });
+device
+.on('message', function(topic, payload) {
+  console.log('We got a message from wsn/AddNode');
+  document.getElementById('control-div').innerHTML = '<p> yeeeeeeees we got it </p>';
+  console.log('message', topic, payload.toString());
+});
 
 
 
@@ -124,7 +124,7 @@ app.post('/addnewnode', (req, res) => {
     console.log('connect');
     device.subscribe('wsn/AddNodeStatus');
     device.publish('wsn/addnodemac', JSON.stringify({ mac: result}));
-    
+
   });
   
   device
