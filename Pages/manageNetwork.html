@@ -1,162 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-
-<!-- 
-    <script>
-      function addnode(node) {
-          console.log("inside addnode  from manageNetwork, mac address is ",node);
-          //Clear the result
-          var ResultData = document.getElementById("result");
-          ResultData.innerHTML = "";
-
-          let request = {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body: node
-            }
-            
-            console.log(node)
-
-            fetch('/addnodebymac', request).then( res => res.json() )
-              .then( data => {
-                document.getElementById('result').innerHTML = data.result;
-              })
-              .catch( err => console.log(err) )
-
-
-     }
-    </script>
-     -->
-
-
-
-  
-	<!-- CSS -->
-  <style>
-  </style>
-
-
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="/css/main.css">
-
-    <title>Manage Network</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blank Page - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/Pricing-Duo-badges.css">
+    <link rel="stylesheet" href="assets/css/Pricing-Duo-icons.css">
+    <link rel="stylesheet" href="assets/css/untitled-2.css">
 </head>
-<body>
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">WSN</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-              <li><a href="/dashboard">Dashboard</a></li>
-              <li><a href="/data">Sensor Data</a></li>
-              <li class="active" ><a href="/manageNetwork">Manage Network</a></li>
-              <li><a href="/map">Map</a></li>
-              <li><a href="/logout">LogOut</a></li>
-          </ul>
-        </div>
-      </nav>
-    <h1>Manage Network</h1>
-    <h2>Adding node to the network</h2>
-    <form id="myForm">
-        <label>Enter MacAddress of the node you want to add: </label>
-        <input type="text" name="X"><br>
-        <input type="submit" value="Submit">
-    </form> 
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>WSN</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i><span>Home Page</span></a><a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/data"><i class="fas fa-table"></i><span>Data</span></a><a class="nav-link" href="/manageNetwork"><i class="fas fa-user"></i><span>Manage Network</span></a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="/map"><i class="fas fa-map-marked"></i><span>Map</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout"><i class="fas fa-user-circle"></i><span>Logout</span></a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <h3 class="text-dark mb-0">Manage Network</h3>
+                        </form>
+                    </div>
+                </nav><div>
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+   crossorigin=""></script>
 
-    Result: </h2> 
-    <div id="result"></div>
-    <div class="block" id="control-div"></div>
+   
+<script>
+  var map = L.map('map').setView([26.310200920923393, 50.145934804499525], 13);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+var marker = L.marker([26.310200920923393, 50.145934804499525]).addTo(map);
+
+var circle = L.circle([26.310200920923393, 50.145934804499525], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 500
+}).addTo(map);
+
+marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+circle.bindPopup("I am a circle.");
+polygon.bindPopup("I am a polygon.");
+
+var popup = L.popup()
+    .setLatLng([51.513, -0.09])
+    .setContent("I am a standalone popup.")
+    .openOn(map);
+
+    var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}
+
+map.on('click', onMapClick);
+
+  </script>
+    
+    
     
 
-
-
-    <script>
-        myForm.addEventListener('submit', e => {
-            e.preventDefault()
-            
-            let NodeMacToBeADD = {}
-            new FormData(myForm).forEach( (value, key) => NodeMacToBeADD[key] = value)
-            
-            let request = {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(NodeMacToBeADD)
-            }
-            
-            console.log(JSON.stringify(NodeMacToBeADD))
-
-            fetch('/addnewnode', request).then( res => res.json() )
-              .then( data => {
-                document.getElementById('result').innerHTML = data.result;
-              })
-              .catch( err => console.log(err) )
-        })
-    </script>
-<!-- 
-
-    <form id="myForm">
-      <label>Enter node mac address to be added : </label>
-      <input type="text" name="macaddress"><br>
-      <input type="submit" value="Submit">
-  </form> 
-
-  Result: </h2> 
-  <div id="result"></div>
-
-  <script>
-      myForm.addEventListener('submit', e => {
-          e.preventDefault()
-    
-          let request = {
-              method: 'POST',
-              headers: {
-              'Content-Type': 'application/json'
-              },
-              body: "Test"
-          }
-          
-          console.log("Mac Address form script is ",document.getElementsByName('macaddress')[0].value)
-
-          fetch('/addnodebymac', request).then( res => res.json() )
-            .then( data => {
-              document.getElementById('result').innerHTML = data.result;
-            })
-            .catch( err => console.log(err) )
-      })
-  </script> -->
-<!-- 
-
-      <label for="addnodelabel"> Please enter the node MAC Address to add it to the network:</label>
-      <input type="text" id="addnodemac" name="addnodemac" required>
-      <button value="0" onclick="addnode(document.getElementsByName('addnodemac')[0].value)">Add node</button> -->
-    <br></br>
-    <h1>Removing a node from the network not updated</h1>
-
-    <form action="/delnode" method="GET">
-      <label for="delnodelabel"> Please enter the node MAC Address to remove it from the network:</label>
-          <input type="text" id="delnode" name="delnode" required>
-      <button type="submit">Submit</button>  
-  </form>
-
-
-  <!-- document.getElementById('result').innerHTML = JSON.stringify(data); -->
-
-  <div id="result"></div>
-
+</div>
+                <div class="container py-4 py-xl-5">
+                    <div class="row mb-5">
+                        <div class="col-md-8 col-xl-6 text-center mx-auto">
+                            <h2>Manage Your Sensor Network</h2>
+                            <p class="w-lg-50">From this page you can add/remove new sensor nodes to your network</p>
+                        </div>
+                    </div>
+                    <div class="row gy-4 gx-md-0 gy-md-0 row-cols-1 row-cols-md-2 row-cols-xl-3 d-md-flex d-xl-flex align-items-md-center">
+                        <div class="col offset-xl-2">
+                            <div class="card bg-light border-0">
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 class="fw-bold mb-0">Remove Node</h3>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <ul class="list-unstyled">
+                                            <li class="d-flex mb-2"><span class="bs-icon-xs bs-icon-rounded bs-icon-primary-light bs-icon me-2"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-lg">
+                                                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+                                                    </svg></span><span>The node will be removed from the overlay network</span></li>
+                                            <li class="d-flex mb-2"><span class="bs-icon-xs bs-icon-rounded bs-icon-primary-light bs-icon me-2"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-lg">
+                                                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+                                                    </svg></span><span>The Xbee profile will be reset&nbsp;</span></li>
+                                        </ul>
+                                    </div>
+                                    <h5 class="fw-bold card-subtitle mb-0">Enter Node MAC Address</h5><span></span><span></span><span style="color: rgb(248,249,252);">0</span><input type="text" style="width: 259px;"><span style="color: rgb(248,249,252);">0</span><a class="btn btn-primary d-block w-100" role="button" href="#">Button</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card text-white bg-primary border-0">
+                                <div class="card-body p-4">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 class="fw-bold text-white mb-0">Add Node</h3>
+                                            <h4 class="display-6 fw-bold text-white"></h4>
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                    <div>
+                                        <ul class="list-unstyled">
+                                            <li class="d-flex mb-2"><span class="bs-icon-xs bs-icon-rounded bs-icon-semi-white bs-icon me-2 xs"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-lg">
+                                                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+                                                    </svg></span><span>The node will be added to the overlay network</span></li>
+                                            <li class="d-flex mb-2"><span class="bs-icon-xs bs-icon-rounded bs-icon-semi-white bs-icon me-2 xs"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-lg">
+                                                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+                                                    </svg></span><span>A new Xbee profile will be pushed to the new node</span></li>
+                                            <li class="d-flex mb-2"></li>
+                                        </ul>
+                                    </div>
+                                    <h5 class="fw-bold card-subtitle mb-0">Enter Node MAC Address</h5><span></span><span></span><span style="color: rgb(78,115,223);">0</span><input type="text" style="width: 259px;"><span style="color: rgb(78,115,223);">0</span><a class="btn btn-primary d-block w-100 bg-white-300" role="button" href="#">Button</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © WSN 2022</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/theme.js"></script>
 </body>
+
 </html>
