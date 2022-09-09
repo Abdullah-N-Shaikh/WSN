@@ -13,7 +13,9 @@ const port = process.env.PORT || 3000;
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-
+// GLOBAL.document = new JSDOM(html).window.document;
+// const jsdom = require("jsdom");
+// const { JSDOM } = jsdom;
 // Passport 
 const passport = require('passport')
 const Local_Strategy = require('passport-local').Strategy 
