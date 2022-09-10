@@ -42,28 +42,36 @@
                         </form>
                     </div>
                 </nav>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="text-primary m-0 fw-bold">Select the which information you want to get</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="text-primary m-0 fw-bold">Get Sensor Data Based on Node Number</h6>
-                                        </div>
-                                        <div class="card-body"><div class="btn-group" role="group">
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4"></h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Get Sensor Data Based on Node Number<br></p>
+                        </div>
+                        <div class="card-body"><div class="btn-group" role="group">
     <button class="btn btn-primary" value="0" onclick="nodeData(this.value)" type="button">Node 0</button>
     <button class="btn btn-primary" value="1" onclick="nodeData(this.value)" type="button">Node 1</button>
     <button class="btn btn-primary" value="2" onclick="nodeData(this.value)" type="button">Node 2</button>
     <button class="btn btn-primary" value="3" onclick="nodeData(this.value)" type="button">Node 3</button>
     <button class="btn btn-primary" value="4" onclick="nodeData(this.value)" type="button">Node 4</button>
-</div></div>
-                                    </div>
+</div>
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"></div>
                                 </div>
                             </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr></tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div></div>
                         </div>
                     </div>
                 </div>
@@ -78,14 +86,14 @@
       <button value="1" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Timestamp</button>
       <button value="2" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Tempreture</button>
       <button value="3" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Reading ID</button>
-      <button value="4" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Hunidity</button>
+      <button value="4" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Humidity</button>
 </div>
                             <div class="row">
                                 <div class="col-md-6 text-nowrap">
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"></div>
+                                    <div id="dataTable_length-1" class="dataTables_length" aria-controls="dataTable"></div>
                                 </div>
                             </div>
-                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr></tr>
