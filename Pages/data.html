@@ -1,262 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-
-	<!-- CSS -->
-  <style>
-table {
-
-font-family: arial, sans-serif;
-
-border-collapse: collapse;
-
-width: 100%;
-
-}
-
-
-td, th {
-
-border: 1px solid #dddddd;
-
-text-align: left;
-
-padding: 8px;
-
-}
-
-
-tr:nth-child(even) {
-
-background-color: #dddddd;
-
-}
-  </style>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="/css/main.css">
-
-    <title>Sensor Data</title>
-    <script>
-      function getAllData() {
-        var Table = document.getElementById("excelDataTable");
-        Table.innerHTML = "";
-          let request = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify("dataTest")
-        }
-        fetch('/all', request).then( res => res.json() )
-        .then( myList => {
-
-
-          var columns = addAllColumnHeaders(myList);
- 
- for (var i = 0 ; i < myList.length ; i++) {
-     var row$ = $('<tr/>');
-     for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
-         var cellValue = myList[i][columns[colIndex]];
-
-         if (cellValue == null) { cellValue = ""; }
-
-         row$.append($('<td/>').html(cellValue));
-     }
-     $("#excelDataTable").append(row$);
- }
-
-
-// Adds a header row to the table and returns the set of columns.
-// Need to do union of keys from all records as some records may not contain
-// all records
-function addAllColumnHeaders(myList)
-{
- var columnSet = [];
- var headerTr$ = $('<tr/>');
-
- for (var i = 0 ; i < myList.length ; i++) {
-     var rowHash = myList[i];
-     for (var key in rowHash) {
-         if ($.inArray(key, columnSet) == -1){
-             columnSet.push(key);
-             headerTr$.append($('<th/>').html(key));
-         }
-     }
- }
- $("#excelDataTable").append(headerTr$);
-
- return columnSet;
-}
-
-          document.getElementById('result').innerHTML = JSON.stringify(data);
-        })
-        .catch( err => console.log(err) )
-      }
-  </script>
-
-<script>
-  function nodeData(node) {
-      console.log("inside getAllDataSpecifc");
-      //Clear the table
-      var Table = document.getElementById("excelDataTable");
-      Table.innerHTML = "";
-      let request = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify("dataTest")
-    }
-    fetch('/all', request).then( res => res.json() )
-    .then( data => {
-      // data = JSON.stringify(data);
-      var myList = data.filter( element => element.Node == node)
-
-      
-
-// Builds the HTML Table out of myList json data from Ivy restful service.
- 
-     var columns = addAllColumnHeaders(myList);
- 
-     for (var i = 0 ; i < myList.length ; i++) {
-         var row$ = $('<tr/>');
-         for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
-             var cellValue = myList[i][columns[colIndex]];
- 
-             if (cellValue == null) { cellValue = ""; }
- 
-             row$.append($('<td/>').html(cellValue));
-         }
-         $("#excelDataTable").append(row$);
-     }
- 
- 
- // Adds a header row to the table and returns the set of columns.
- // Need to do union of keys from all records as some records may not contain
- // all records
- function addAllColumnHeaders(myList)
- {
-     var columnSet = [];
-     var headerTr$ = $('<tr/>');
- 
-     for (var i = 0 ; i < myList.length ; i++) {
-         var rowHash = myList[i];
-         for (var key in rowHash) {
-             if ($.inArray(key, columnSet) == -1){
-                 columnSet.push(key);
-                 headerTr$.append($('<th/>').html(key));
-             }
-         }
-     }
-     $("#excelDataTable").append(headerTr$);
- 
-     return columnSet;
- }
-
-      // document.getElementById('result').innerHTML = JSON.stringify(myList);
-    })
-    .catch( err => console.log(err) )
-  }
-</script>
-
-<script>
-  function sortTable(val) {
-    console.log("Inside sortTable")
-    var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.getElementById("excelDataTable");
-    switching = true;
-    /*Make a loop that will continue until
-    no switching has been done:*/
-    while (switching) {
-      //start by saying: no switching is done:
-      switching = false;
-      rows = table.rows;
-      /*Loop through all table rows (except the
-      first, which contains table headers):*/
-      for (i = 1; i < (rows.length - 1); i++) {
-        //start by saying there should be no switching:
-        shouldSwitch = false;
-        /*Get the two elements you want to compare,
-        one from current row and one from the next:*/
-        x = rows[i].getElementsByTagName("TD")[val];
-        y = rows[i + 1].getElementsByTagName("TD")[val];
-        //check if the two rows should switch place:
-        if (Number(x.innerHTML) > Number(y.innerHTML)) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      }
-      if (shouldSwitch) {
-        /*If a switch has been marked, make the switch
-        and mark that a switch has been done:*/
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-      }
-    }
-  }
-  </script>
-
-<!-- let numbers = { 
-  "X": event.currentTarget.X.value,
-  "Y": event.currentTarget.Y.value
-}; -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Table - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/Pricing-Duo-badges.css">
+    <link rel="stylesheet" href="assets/css/Pricing-Duo-icons.css">
+    <link rel="stylesheet" href="assets/css/untitled-2.css">
 </head>
-<body>
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">WSN</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-              <li><a href="/dashboard">Dashboard</a></li>
-              <li class="active" ><a href="/data">Sensor Data</a></li>
-              <li><a href="/manageNetwork">Manage Network</a></li>
-              <li><a href="/map">Map</a></li>
-              <li><a href="/logout">LogOut</a></li>
-          </ul>
-        </div>
-      </nav>
-    <h1>Click one of the buttons to show some data</h1>
-    <br></br>
-    <button onclick="getAllData()">Show all data on the database</button>
-    <br></br>
-    <button value="0" onclick="nodeData(this.value)">Show all Node0 data</button>
-    <button value="1" onclick="nodeData(this.value)">Show all Node1 data</button>
-    <button value="2" onclick="nodeData(this.value)">Show all Node2 data</button>
-    <button value="3" onclick="nodeData(this.value)">Show all Node3 data</button>
-    <button value="4" onclick="nodeData(this.value)">Show all Node4 data</button>
-    <br></br>
-    <p>Click the button to sort the table numerically:</p>
-    <p><button value="0" onclick="sortTable(this.value)">Sort Node</button>
-      <button value="1" onclick="sortTable(this.value)">Sort Timestamp</button>
-      <button value="2" onclick="sortTable(this.value)">Sort Tempreture</button>
-      <button value="3" onclick="sortTable(this.value)">Sort Reading ID</button>
-      <button value="4" onclick="sortTable(this.value)">Sort Hunidity</button></p>
-
-
-
-<!-- 
-    <form onclick="getAllDataSpecifc()">
-      <label>Type reading number you want to display:
-        <input type = "text" name="Y"  id="Y"></input>
-        </label>
-        <input type="submit" value="Submit"></input>
-    </form> -->
-
-
-
-    <!-- <div id="result"></div> -->
-    <table id="excelDataTable" border="1">
-    </table>
-
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>WSN</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i><span>Home Page</span></a><a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/data"><i class="fas fa-table"></i><span>Data</span></a><a class="nav-link" href="/manageNetwork"><i class="fas fa-user"></i><span>Manage Network</span></a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="/map"><i class="fas fa-map-marked"></i><span>Map</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout"><i class="fas fa-user-circle"></i><span>Logout</span></a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <h3 class="text-dark mb-0">Sensor Database</h3>
+                        </form>
+                    </div>
+                </nav>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="text-primary m-0 fw-bold">Select the which information you want to get</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="text-primary m-0 fw-bold">Get Sensor Data Based on Node Number</h6>
+                                        </div>
+                                        <div class="card-body"><div class="btn-group" role="group">
+    <button class="btn btn-primary" value="0" onclick="nodeData(this.value)" type="button">Node 0</button>
+    <button class="btn btn-primary" value="1" onclick="nodeData(this.value)" type="button">Node 1</button>
+    <button class="btn btn-primary" value="2" onclick="nodeData(this.value)" type="button">Node 2</button>
+    <button class="btn btn-primary" value="3" onclick="nodeData(this.value)" type="button">Node 3</button>
+    <button class="btn btn-primary" value="4" onclick="nodeData(this.value)" type="button">Node 4</button>
+</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4"></h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Collected Information</p>
+                        </div>
+                        <div class="card-body"><div class="btn-group" role="group">
+    <button value="0" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Node</button>
+      <button value="1" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Timestamp</button>
+      <button value="2" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Tempreture</button>
+      <button value="3" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Reading ID</button>
+      <button value="4" onclick="sortTable(this.value)"  class="btn btn-primary" type="button">Sort Hunidity</button>
+</div>
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"></div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr></tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © WSN 2022</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/theme.js"></script>
 </body>
+
 </html>
