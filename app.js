@@ -23,9 +23,6 @@ app.ws('/echo', function(ws, req) {
   });
 });
 
-// GLOBAL.document = new JSDOM(html).window.document;
-// const jsdom = require("jsdom");
-// const { JSDOM } = jsdom;
 // Passport 
 const passport = require('passport')
 const Local_Strategy = require('passport-local').Strategy 
@@ -57,6 +54,8 @@ device
   console.log('We got a message from wsn/AddNode');
   document.getElementById('control-div').innerHTML = '<p> yeeeeeeees we got it </p>';
   console.log('message', topic, payload.toString());
+  ws.send("Hi Again");
+
 });
 
 
