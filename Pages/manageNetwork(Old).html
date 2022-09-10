@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+
+<!-- 
+    <script>
+      function addnode(node) {
+          console.log("inside addnode  from manageNetwork, mac address is ",node);
+          //Clear the result
+          var ResultData = document.getElementById("result");
+          ResultData.innerHTML = "";
+
+          let request = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: node
+            }
+            
+            console.log(node)
+
+            fetch('/addnodebymac', request).then( res => res.json() )
+              .then( data => {
+                document.getElementById('result').innerHTML = data.result;
+              })
+              .catch( err => console.log(err) )
+
+
+     }
+    </script>
+     -->
+
+
+
+  
+	<!-- CSS -->
+  <style>
+  </style>
+
+
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/main.css">
+
+    <title>Manage Network</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">WSN</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+              <li><a href="/dashboard">Dashboard</a></li>
+              <li><a href="/data">Sensor Data</a></li>
+              <li class="active" ><a href="/manageNetwork">Manage Network</a></li>
+              <li><a href="/map">Map</a></li>
+              <li><a href="/logout">LogOut</a></li>
+          </ul>
+        </div>
+      </nav>
+    <h1>Manage Network</h1>
+    <h2>Adding node to the network</h2>
+    <form id="myForm">
+        <label>Enter MacAddress of the node you want to add: </label>
+        <input type="text" name="X"><br>
+        <input type="submit" value="Submit">
+    </form> 
+
+    Result: </h2> 
+    <div id="result"></div>
+    <div class="block" id="control-div"></div>
+    
+
+
+
+    <script>
+                // Create WebSocket connection.
+        const socket = new WebSocket('ws://wsn-env.eba-4rpxpp9a.us-east-1.elasticbeanstalk.com/echo');
+
+        // Connection opened
+        socket.addEventListener('open', (event) => {
+            socket.send('Hello Server!');
+        });
+
+        // Listen for messages
+        socket.addEventListener('message', (event) => {
+            console.log('Message from server we got it ', event.data);
+        });
+
+
+        myForm.addEventListener('submit', e => {
+            e.preventDefault()
+            
+            let NodeMacToBeADD = {}
+            new FormData(myForm).forEach( (value, key) => NodeMacToBeADD[key] = value)
+            
+            let request = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(NodeMacToBeADD)
+            }
+            
+            console.log(JSON.stringify(NodeMacToBeADD))
+
+            fetch('/addnewnode', request).then( res => res.json() )
+              .then( data => {
+                document.getElementById('result').innerHTML = data.result;
+              })
+              .catch( err => console.log(err) )
+        })
+    </script>
+
+
+    
+<!-- 
+
+    <form id="myForm">
+      <label>Enter node mac address to be added : </label>
+      <input type="text" name="macaddress"><br>
+      <input type="submit" value="Submit">
+  </form> 
+
+  Result: </h2> 
+  <div id="result"></div>
+
+  <script>
+      myForm.addEventListener('submit', e => {
+          e.preventDefault()
+    
+          let request = {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json'
+              },
+              body: "Test"
+          }
+          
+          console.log("Mac Address form script is ",document.getElementsByName('macaddress')[0].value)
+
+          fetch('/addnodebymac', request).then( res => res.json() )
+            .then( data => {
+              document.getElementById('result').innerHTML = data.result;
+            })
+            .catch( err => console.log(err) )
+      })
+  </script> -->
+<!-- 
+
+      <label for="addnodelabel"> Please enter the node MAC Address to add it to the network:</label>
+      <input type="text" id="addnodemac" name="addnodemac" required>
+      <button value="0" onclick="addnode(document.getElementsByName('addnodemac')[0].value)">Add node</button> -->
+    <br></br>
+    <h1>Removing a node from the network not updated</h1>
+
+    <form action="/delnode" method="GET">
+      <label for="delnodelabel"> Please enter the node MAC Address to remove it from the network:</label>
+          <input type="text" id="delnode" name="delnode" required>
+      <button type="submit">Submit</button>  
+  </form>
+
+
+  <!-- document.getElementById('result').innerHTML = JSON.stringify(data); -->
+
+  <div id="result"></div>
+
+</body>
+</html>

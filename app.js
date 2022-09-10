@@ -14,14 +14,16 @@ const port = process.env.PORT || 3000;
 // app.use(flash());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-var expressWs = require('express-ws')(app);
+// var expressWs = require('express-ws')(app);
 
 
-app.ws('/echo', function(ws, req) {
-  ws.on('message', function(msg) {
-    ws.send(msg);
-  });
-});
+// app.ws('/echo', function(ws, req) {
+//   ws.on('message', function(msg) {
+//     ws.send(msg);
+//   });
+
+//   ws.on('')
+// });
 
 // Passport 
 const passport = require('passport')
@@ -54,7 +56,7 @@ device
   console.log('We got a message from wsn/AddNode');
   // document.getElementById('control-div').innerHTML = '<p> yeeeeeeees we got it </p>';
   console.log('message', topic, payload.toString());
-  expressWs.getWss().emit("hi there")
+  // expressWs.getWss().emit("hi there")
 });
 
 
