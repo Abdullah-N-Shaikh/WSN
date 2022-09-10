@@ -52,10 +52,9 @@ device
 device
 .on('message', function(topic, payload) {
   console.log('We got a message from wsn/AddNode');
-  document.getElementById('control-div').innerHTML = '<p> yeeeeeeees we got it </p>';
+  // document.getElementById('control-div').innerHTML = '<p> yeeeeeeees we got it </p>';
   console.log('message', topic, payload.toString());
-  ws.send("Hi Again");
-
+  expressWs.getWss().emit("hi there")
 });
 
 
