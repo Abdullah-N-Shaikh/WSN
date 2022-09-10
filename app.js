@@ -5,6 +5,8 @@ const session = require('express-session')
 // const flash =require('connect-flash');
 
 
+
+
 // const router = express.Router();
 
 const app = express()
@@ -12,6 +14,14 @@ const port = process.env.PORT || 3000;
 // app.use(flash());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+var expressWs = require('express-ws')(app);
+
+
+app.ws('/echo', function(ws, req) {
+  ws.on('message', function(msg) {
+    ws.send(msg);
+  });
+});
 
 // GLOBAL.document = new JSDOM(html).window.document;
 // const jsdom = require("jsdom");
