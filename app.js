@@ -214,10 +214,10 @@ app.post('/addnewnode', (req, res) => {
     }
     try {
       const SensorDataAll = await scanDynamoRecords(params, []);
-      // const body = {
-      //   products: SensorDataAll
-      // }
-      res.json({ user: 'tj' });
+      const body = {
+        products: SensorDataAll
+      }
+      res.json(body);
       // res.json(SensorDataAll);
     } catch(error) {
       console.error('Do your custom error handling here. I am just ganna log it out: ', error);
