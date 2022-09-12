@@ -218,7 +218,7 @@ app.post('/addnewnode', (req, res) => {
         products: SensorDataAll
       }
       // res.json(body);
-      res.send(SensorDataAll);
+      res.json(SensorDataAll);
     } catch(error) {
       console.error('Do your custom error handling here. I am just ganna log it out: ', error);
       res.status(500).send(error);
