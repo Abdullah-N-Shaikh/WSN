@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/Pricing-Duo-badges.css">
     <link rel="stylesheet" href="assets/css/Pricing-Duo-icons.css">
     <link rel="stylesheet" href="assets/css/untitled-2.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <style>
         table {
@@ -58,11 +59,11 @@
       fetch('/all', request).then( res => res.json() )
       .then( data => {
         console.log("Data before",data)
-        // data = JSON.stringify(data);
+        data = JSON.stringify(data);
         console.log("Data",data)
         console.log("myList before", myList)
-        // var myList = data.filter( element => element.Node == node)
-        var myList = data
+        var myList = data.filter( element => element.Node == node)
+        // var myList = data
 
         console.log("myList", myList)
   
