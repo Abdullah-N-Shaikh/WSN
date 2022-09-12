@@ -214,9 +214,9 @@ app.post('/addnewnode', (req, res) => {
     }
     try {
       const SensorDataAll = await scanDynamoRecords(params, []);
-      const body = {
-        products: SensorDataAll
-      }
+      // const body = {
+      //   products: SensorDataAll
+      // }
       // res.json(body);
       res.json(SensorDataAll);
     } catch(error) {
