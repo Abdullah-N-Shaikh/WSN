@@ -4,13 +4,148 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Brand</title>
+    <title>Sensor Data</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/Pricing-Duo-badges.css">
     <link rel="stylesheet" href="assets/css/Pricing-Duo-icons.css">
     <link rel="stylesheet" href="assets/css/untitled-2.css">
+
+    <style>
+        table {
+        
+        font-family: arial, sans-serif;
+        
+        border-collapse: collapse;
+        
+        width: 100%;
+        
+        }
+        
+        
+        td, th {
+        
+        border: 1px solid #dddddd;
+        
+        text-align: left;
+        
+        padding: 8px;
+        
+        }
+        
+        
+        tr:nth-child(even) {
+        
+        background-color: #dddddd;
+        
+        }
+          </style>
+
+<script>
+    function nodeData(node) {
+        console.log("inside data.html/nodeData function");
+        //Clear the table
+        var Table = document.getElementById("excelDataTable");
+        Table.innerHTML = "";
+        let request = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify("dataTest")
+      }
+      fetch('/all', request).then( res => res.json() )
+      .then( data => {
+        // data = JSON.stringify(data);
+        var myList = data.filter( element => element.Node == node)
+  
+        
+  
+  // Builds the HTML Table out of myList json data from Ivy restful service.
+   
+       var columns = addAllColumnHeaders(myList);
+   
+       for (var i = 0 ; i < myList.length ; i++) {
+           var row$ = $('<tr/>');
+           for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
+               var cellValue = myList[i][columns[colIndex]];
+   
+               if (cellValue == null) { cellValue = ""; }
+   
+               row$.append($('<td/>').html(cellValue));
+           }
+           $("#excelDataTable").append(row$);
+       }
+   
+   
+   // Adds a header row to the table and returns the set of columns.
+   // Need to do union of keys from all records as some records may not contain
+   // all records
+   function addAllColumnHeaders(myList)
+   {
+       var columnSet = [];
+       var headerTr$ = $('<tr/>');
+   
+       for (var i = 0 ; i < myList.length ; i++) {
+           var rowHash = myList[i];
+           for (var key in rowHash) {
+               if ($.inArray(key, columnSet) == -1){
+                   columnSet.push(key);
+                   headerTr$.append($('<th/>').html(key));
+               }
+           }
+       }
+       $("#excelDataTable").append(headerTr$);
+   
+       return columnSet;
+   }
+  
+        // document.getElementById('result').innerHTML = JSON.stringify(myList);
+      })
+      .catch( err => console.log(err) )
+    }
+  </script>
+  
+  <script>
+    function sortTable(val) {
+      console.log("Inside sortTable")
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("excelDataTable");
+      switching = true;
+      /*Make a loop that will continue until
+      no switching has been done:*/
+      while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+          //start by saying there should be no switching:
+          shouldSwitch = false;
+          /*Get the two elements you want to compare,
+          one from current row and one from the next:*/
+          x = rows[i].getElementsByTagName("TD")[val];
+          y = rows[i + 1].getElementsByTagName("TD")[val];
+          //check if the two rows should switch place:
+          if (Number(x.innerHTML) > Number(y.innerHTML)) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+        if (shouldSwitch) {
+          /*If a switch has been marked, make the switch
+          and mark that a switch has been done:*/
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+    }
+    </script>
+  
+
 </head>
 
 <body id="page-top">
@@ -94,7 +229,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
-                                <table class="table my-0" id="dataTable">
+                                <table class="table my-0" id="excelDataTable">
                                     <thead>
                                         <tr></tr>
                                     </thead>

@@ -59,16 +59,18 @@ device
   // expressWs.getWss().emit("hi there")
 });
 
+AWS.config.update({
+  region: 'us-east-1'
+});
+const dynamodb = new AWS.DynamoDB.DocumentClient();
+const DynamoDB = new AWS.DynamoDB();
 
-
+const dynamodbTableName = 'Database';
 
 AWS.config.update({
     region: 'me-south-1'
   });
-const dynamodb = new AWS.DynamoDB.DocumentClient();
-const DynamoDB = new AWS.DynamoDB();
 
-const dynamodbTableName = 'SensorData';
 
 app.use(express.static(__dirname + '/img/'));
 app.use(express.static('Pages'))
