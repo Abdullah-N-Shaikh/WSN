@@ -57,7 +57,8 @@
       }
       fetch('/all', request).then( res => res.json() )
       .then( data => {
-        // data = JSON.stringify(data);
+        data = JSON.stringify(data);
+        console.log("myList before", myList)
         var myList = data.filter( element => element.Node == node)
         console.log("myList", myList)
   
